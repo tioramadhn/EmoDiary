@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">emodiary</string>
+
+    <!-- Network error message -->
+    <string name="network_error">Kesalahan jaringan</string>
+
+    <!-- Form validation error message -->
+    <string name="email_required_error">Email wajib diisi</string>
+    <string name="email_invalid_error">Format email salah</string>
+    <string name="password_required_error">Kata sandi wajib diisi</string>
+    <string name="password_length_error">Kata sandi minimal 6 karakter</string>
+    <string name="password_white_space_error">Kata sandi tidak boleh mengandung spasi</string>
+    <string name="password_upper_case_error">Kata sandi wajib mengandung huruf kapital</string>
+    <string name="password_lower_case_error">Kata sandi wajib mengandung huruf non-kapital</string>
+    <string name="password_number_error">Kata sandi wajib mengandung angka</string>
+</resources>

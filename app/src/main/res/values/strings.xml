@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">emodiary</string>
+
+    <!-- Network error message -->
+    <string name="network_error">Network error</string>
+
+    <!-- Form validation error message -->
+    <string name="email_required_error">Email is required</string>
+    <string name="email_invalid_error">Invalid email format</string>
+    <string name="password_required_error">Password is required</string>
+    <string name="password_length_error">Password must at least 6 characters</string>
+    <string name="password_white_space_error">Password must not contain white spaces</string>
+    <string name="password_upper_case_error">Password must contain one upper case letter</string>
+    <string name="password_lower_case_error">Password must contain one lower case letter</string>
+    <string name="password_number_error">Password must contain one digit number</string>
 </resources>
