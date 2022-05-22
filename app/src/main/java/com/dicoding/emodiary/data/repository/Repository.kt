@@ -4,15 +4,13 @@ import com.dicoding.emodiary.data.remote.retrofit.ApiService
 
 class Repository(private val apiService: ApiService) : BaseRepository() {
 
-    /*
-     *
-     *   Example implementation
-     *
-     *   fun login(email: String, password: String) = safeApiCall {
-     *      apiService.login(email, password)
-     *   }
-     *
-     */
+    fun login(email: String, password: String) = safeApiCall {
+        apiService.login(email, password)
+    }
+
+    fun register(email: String, fullname: String, password: String) = safeApiCall {
+        apiService.register(email, fullname, password)
+    }
 
     fun refreshAccessToken(refreshToken: String) = safeApiCall {
         apiService.refreshAccessToken(refreshToken)

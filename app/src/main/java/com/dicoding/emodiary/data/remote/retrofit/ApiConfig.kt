@@ -17,7 +17,8 @@ object ApiConfig {
         val loggingInterceptor = HttpLoggingInterceptor().setLevel(level)
 
         val client = OkHttpClient.Builder()
-            .authenticator(TokenAuthenticator(context))
+            // TODO: authenticator still have a bug
+            // .authenticator(TokenAuthenticator(context))
             .addInterceptor(TokenInterceptor(context))
             .addInterceptor(loggingInterceptor)
             .connectTimeout(30, TimeUnit.SECONDS)

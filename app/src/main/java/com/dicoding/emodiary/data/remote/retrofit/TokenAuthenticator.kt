@@ -8,6 +8,7 @@ import com.dicoding.emodiary.utils.SessionManager
 import com.dicoding.emodiary.utils.State
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
+import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
