@@ -14,6 +14,10 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
      *
      */
 
+    fun refreshAccessToken(refreshToken: String) = safeApiCall {
+        apiService.refreshAccessToken(refreshToken)
+    }
+
     companion object {
         @Volatile
         private var instance: Repository? = null
