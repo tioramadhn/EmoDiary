@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Emodiary">
         <activity
+            android:name=".ui.view.SplashScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>
