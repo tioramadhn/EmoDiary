@@ -1,17 +1,26 @@
 package com.dicoding.emodiary.ui.view
 
+import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
+import com.dicoding.emodiary.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOnBoardingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_boarding)
+        binding = ActivityOnBoardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupView()
+        binding.btnMulai.setOnClickListener {
+            val intent = Intent(this@OnBoardingActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setupView() {

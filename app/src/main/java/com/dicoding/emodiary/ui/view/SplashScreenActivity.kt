@@ -1,10 +1,13 @@
 package com.dicoding.emodiary.ui.view
 
+import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -12,6 +15,12 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         setupView()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this@SplashScreenActivity, OnBoardingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 2000)
     }
 
     private fun setupView() {

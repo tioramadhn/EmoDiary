@@ -12,13 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Emodiary">
         <activity
-            android:name=".OnBoardingActivity"
+            android:name=".ui.view.OnBoardingActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.SplashScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.view.MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
