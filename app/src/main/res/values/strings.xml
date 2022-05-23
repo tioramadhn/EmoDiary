@@ -13,4 +13,13 @@
     <string name="password_upper_case_error">Password must contain one upper case letter</string>
     <string name="password_lower_case_error">Password must contain one lower case letter</string>
     <string name="password_number_error">Password must contain one digit number</string>
+    <string name="emo_diary">Emo-Diary</string>
+    <string name="emodiary_sub">Teman curhat yang hanya mengerti kamuu</string>
+    <string name="title_menu_1">Virtual Emotional Support System</string>
+    <string name="desc_menu_1">Ceritakan apapun yang kamu rasakan</string>
+    <string name="mulai">Mulai</string>
+    <string name="title_menu_2">Teman virtual</string>
+    <string name="desc_menu_2">Kami akan mendengar cerita mu hari ini</string>
+    <string name="title_menu_3">Santai kayak dipantai</string>
+    <string name="desc_menu_3">Pikiran tenang dan nyaman bersama kami</string>
 </resources>

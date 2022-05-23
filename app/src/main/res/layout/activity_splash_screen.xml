@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Emo-Diary"
+        android:text="@string/emo_diary"
         android:textAlignment="center"
         android:textSize="32dp"
         android:textStyle="bold"
@@ -27,8 +27,7 @@
         android:id="@+id/tv_sub_emodiary"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Teman curhat yang
-hanya mengerti kamuu"
+        android:text="@string/emodiary_sub"
         android:textSize="16dp"
         android:textColor="@color/blue_sky"
         android:textStyle="italic"

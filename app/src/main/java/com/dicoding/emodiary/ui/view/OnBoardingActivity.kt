@@ -7,10 +7,10 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import com.dicoding.emodiary.R
 
-class SplashScreenActivity : AppCompatActivity() {
+class OnBoardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_on_boarding)
         setupView()
     }
 
