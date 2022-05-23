@@ -12,8 +12,8 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
         apiService.register(email, fullname, password)
     }
 
-    fun refreshAccessToken(refreshToken: String) = safeApiCall {
-        apiService.refreshAccessToken(refreshToken)
+    fun getDiaries(page: Int, size: Int) = safeApiCall {
+        apiService.getDiaries(page, size)
     }
 
     companion object {

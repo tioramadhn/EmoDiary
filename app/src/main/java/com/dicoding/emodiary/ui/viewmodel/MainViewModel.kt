@@ -4,10 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.emodiary.data.repository.Repository
 
 class MainViewModel(private val repository: Repository): ViewModel() {
-    /*
-     *  Example implementation
-     *
-     *  fun login(email: String, password: String) = repository.login(email, password)
-     *
-     */
+    fun login(email: String, password: String) = repository.login(email, password)
+
+    fun getDiaries(page: Int, size: Int) = repository.getDiaries(page, size)
 }

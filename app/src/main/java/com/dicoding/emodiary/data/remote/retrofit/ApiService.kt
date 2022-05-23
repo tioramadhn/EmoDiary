@@ -1,11 +1,11 @@
 package com.dicoding.emodiary.data.remote.retrofit
 
+import com.dicoding.emodiary.data.remote.body.RefreshTokenBody
+import com.dicoding.emodiary.data.remote.response.DiariesResponse
 import com.dicoding.emodiary.data.remote.response.LoginResponse
-import retrofit2.http.Field
-import retrofit2.http.POST
 import com.dicoding.emodiary.data.remote.response.RefreshAccessTokenResponse
 import com.dicoding.emodiary.data.remote.response.RegisterResponse
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
@@ -25,6 +25,12 @@ interface ApiService {
 
     @POST("/authentications/refresh")
     suspend fun refreshAccessToken(
-        @Field("refreshToken") refreshToken: String
+        @Body refreshToken: RefreshTokenBody
     ): RefreshAccessTokenResponse
+
+    @GET("/diaries")
+    suspend fun getDiaries(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): DiariesResponse
 }
