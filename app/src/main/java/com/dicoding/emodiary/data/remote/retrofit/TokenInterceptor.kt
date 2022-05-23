@@ -4,7 +4,6 @@ import android.content.Context
 import com.dicoding.emodiary.utils.ACCESS_TOKEN
 import com.dicoding.emodiary.utils.SessionManager
 import okhttp3.Interceptor
-import okhttp3.Request
 import okhttp3.Response
 
 class TokenInterceptor(context: Context) : Interceptor {

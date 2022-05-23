@@ -17,13 +17,11 @@ object ApiConfig {
         val loggingInterceptor = HttpLoggingInterceptor().setLevel(level)
 
         val client = OkHttpClient.Builder()
-            // TODO: authenticator still have a bug
-            // .authenticator(TokenAuthenticator(context))
+            .authenticator(TokenAuthenticator(context))
             .addInterceptor(TokenInterceptor(context))
             .addInterceptor(loggingInterceptor)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
             .build()
 
         val retrofit = Retrofit.Builder()
