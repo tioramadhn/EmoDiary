@@ -5,6 +5,8 @@ import android.util.Log
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun String.withDateFormat(): String {
@@ -23,4 +25,16 @@ fun String.withDateFormat(): String {
         e.printStackTrace()
     }
     return this
+}
+
+fun getDateNow(): String {
+    val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        LocalDateTime.now()
+    } else {
+        throw IllegalArgumentException("Unparseable date")
+    }
+
+    val formatted = "${current.dayOfWeek}, ${current.dayOfMonth} ${current.month} ${current.year}".lowercase()
+    val words = formatted.split(' ');
+    return words.joinToString(separator = " ") { word -> word.replaceFirstChar { it.uppercase() } }
 }

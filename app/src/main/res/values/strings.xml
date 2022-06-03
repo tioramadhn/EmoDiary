@@ -42,4 +42,7 @@
     <string name="date_diary">Kamis, 2 Juni 2022</string>
     <string name="diary_desc">Hari ini aku senang sekali karena bertemu dengan teman baru di kampus. Teman ku bernama Sinta, Jono dan Gono...</string>
     <string name="diary_title">Bertemu dengan teman baru</string>
+    <string name="mood_kamu_hari_ini">Mood kamu hari ini</string>
+    <string name="mood">Senang</string>
+    <string name="say_halo">Halo, %1s</string>
 </resources>

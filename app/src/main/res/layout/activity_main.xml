@@ -31,14 +31,14 @@
         app:layout_constraintBottom_toBottomOf="@id/banner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/banner"
-        tools:src="@tools:sample/avatars" />
+        android:src="@drawable/default_profile"/>
 
     <TextView
         android:id="@+id/tv_halo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Halo, Tio Ramadhan"
+        android:text="@string/say_halo"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -79,14 +79,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:padding="16dp">
 
             <TextView
                 android:id="@+id/tv_mood_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mood kamu hari ini"
-                android:textColor="@color/black"
+                android:text="@string/mood_kamu_hari_ini"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -98,13 +98,13 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_mood_title"
-                tools:src="@tools:sample/avatars" />
+                android:src="@drawable/emo_happy"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Senang"
+                android:text="@string/mood"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/img_mood"
@@ -115,7 +115,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStory"
+        android:id="@+id/rvDiary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"

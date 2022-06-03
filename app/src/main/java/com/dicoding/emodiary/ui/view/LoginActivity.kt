@@ -100,8 +100,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login(data: LoginResponse) {
         val session = SessionManager(this)
-        data.accessToken?.let { session.setString(ACCESS_TOKEN, it) }
-        data.refreshToken?.let{session.setString(REFRESH_TOKEN, it)}
+
+        data.apply {
+            accessToken?.let { session.setString(ACCESS_TOKEN, it) }
+            refreshToken?.let { session.setString(REFRESH_TOKEN, it) }
+            photo?.let { session.setString("photo", it) }
+            fullname?.let { session.setString("fullname", it) }
+        }
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
