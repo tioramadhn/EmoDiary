@@ -22,4 +22,20 @@
     <string name="desc_menu_2">Kami akan mendengar cerita mu hari ini</string>
     <string name="title_menu_3">Santai kayak dipantai</string>
     <string name="desc_menu_3">Pikiran tenang dan nyaman bersama kami</string>
+    <string name="masuk">Masuk</string>
+    <string name="login_desc">Selamat datang kembali, silahkan masuk dengan\nakun yang sudah terdaftar</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="or">atau</string>
+    <string name="masuk_dengan_google">Masuk dengan Google</string>
+    <string name="daftar">Daftar</string>
+    <string name="regist_desc">Gabung bersama Emo-Diary dan ungkapkan perasaan kamu</string>
+    <string name="full_name">Full Name</string>
+    <string name="daftar_dengan_google">Daftar dengan Google</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="masuk_sekarang">Masuk sekarang</string>
+    <string name="belum_punya_akun_ayo">Belum punya akun? Ayo</string>
+    <string name="login_success_msg">Login Success</string>
+    <string name="name_is_empty">Name cannot empty</string>
+    <string name="regist_success_msg">Register Success</string>
 </resources>

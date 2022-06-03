@@ -17,7 +17,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupView()
         binding.btnMulai.setOnClickListener {
-            val intent = Intent(this@OnBoardingActivity, MainActivity::class.java)
+            val intent = Intent(this@OnBoardingActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

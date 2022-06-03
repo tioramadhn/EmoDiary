@@ -237,12 +237,14 @@
         <Constraint
             android:id="@+id/btn_mulai"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="64dp"
             motion:layout_constraintBottom_toTopOf="@+id/menu2"
             android:alpha="1"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu2"
