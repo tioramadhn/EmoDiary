@@ -38,4 +38,8 @@
     <string name="login_success_msg">Login Success</string>
     <string name="name_is_empty">Name cannot empty</string>
     <string name="regist_success_msg">Register Success</string>
+    <string name="foto_profil">Foto profil</string>
+    <string name="date_diary">Kamis, 2 Juni 2022</string>
+    <string name="diary_desc">Hari ini aku senang sekali karena bertemu dengan teman baru di kampus. Teman ku bernama Sinta, Jono dan Gono...</string>
+    <string name="diary_title">Bertemu dengan teman baru</string>
 </resources>

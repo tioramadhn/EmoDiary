@@ -41,10 +41,10 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             btnDaftar.setOnClickListener {
-                val name = nameEditText.toString()
+                val name = nameEditText.text.toString()
                 val email = emailEditText.text.toString()
                 val password = passwordEditText.text.toString()
-
+                Log.d("Req BODY", "name: $name, email: $email, password: $password")
                 val validEmail = isEmailValid(this@RegisterActivity, email)
                 val validPassword = isPasswordValid(this@RegisterActivity, password)
 
@@ -59,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
                         passwordEditTextLayout.error = validPassword.first
                     }
                     else -> {
-                        viewModel.login(email, password).observe(this@RegisterActivity) {
+                        viewModel.register(email, name, password).observe(this@RegisterActivity) {
                             when (it) {
                                 is State.Loading -> {
                                     progressBar.visibility = View.VISIBLE
@@ -68,6 +68,8 @@ class RegisterActivity : AppCompatActivity() {
                                 }
                                 is State.Success -> {
                                     progressBar.visibility = View.GONE
+                                    btnDaftar.isEnabled = true
+                                    btnDaftarGoogle.isEnabled = true
                                     val data = it.data
                                     Toast.makeText(
                                         this@RegisterActivity,
@@ -92,6 +94,8 @@ class RegisterActivity : AppCompatActivity() {
                                 }
                                 is State.Error -> {
                                     progressBar.visibility = View.GONE
+                                    btnDaftar.isEnabled = true
+                                    btnDaftarGoogle.isEnabled = true
                                     Toast.makeText(
                                         this@RegisterActivity,
                                         it.error,

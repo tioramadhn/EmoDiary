@@ -11,12 +11,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
+import com.dicoding.emodiary.data.remote.response.LoginResponse
 import com.dicoding.emodiary.databinding.ActivityLoginBinding
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
-import com.dicoding.emodiary.utils.State
-import com.dicoding.emodiary.utils.isEmailValid
-import com.dicoding.emodiary.utils.isPasswordValid
+import com.dicoding.emodiary.utils.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -65,6 +64,8 @@ class LoginActivity : AppCompatActivity() {
                                 }
                                 is State.Success -> {
                                     progressBar.visibility = View.GONE
+                                    btnMasuk.isEnabled = true
+                                    btnMasukGoogle.isEnabled = true
                                     val data = it.data
                                     Toast.makeText(
                                         this@LoginActivity,
@@ -72,9 +73,13 @@ class LoginActivity : AppCompatActivity() {
                                         Toast.LENGTH_LONG
                                     ).show()
                                     Log.d("Response LOGIN SUKSES", data.toString())
+
+                                    login(data)
                                 }
                                 is State.Error -> {
                                     progressBar.visibility = View.GONE
+                                    btnMasuk.isEnabled = true
+                                    btnMasukGoogle.isEnabled = true
                                     Toast.makeText(
                                         this@LoginActivity,
                                         it.error,
@@ -91,6 +96,15 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun login(data: LoginResponse) {
+        val session = SessionManager(this)
+        data.accessToken?.let { session.setString(ACCESS_TOKEN, it) }
+        data.refreshToken?.let{session.setString(REFRESH_TOKEN, it)}
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun setupView() {

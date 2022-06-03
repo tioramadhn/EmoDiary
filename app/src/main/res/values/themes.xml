@@ -14,10 +14,5 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="leaf">
-        <item name="cornerSize">16dp</item>           //can specify corner position
-        <item name="android:background">@color/white</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
 
 </resources>

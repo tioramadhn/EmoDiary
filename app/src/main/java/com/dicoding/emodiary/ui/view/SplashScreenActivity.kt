@@ -9,6 +9,9 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
+import com.dicoding.emodiary.utils.ACCESS_TOKEN
+import com.dicoding.emodiary.utils.IS_USER_SEEN_ONBOARDING_SCREEN
+import com.dicoding.emodiary.utils.SessionManager
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,9 +20,20 @@ class SplashScreenActivity : AppCompatActivity() {
         setupView()
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashScreenActivity, OnBoardingActivity::class.java)
-            startActivity(intent)
-            finish()
+            val session = SessionManager(this)
+            if(session.getBoolean(IS_USER_SEEN_ONBOARDING_SCREEN ) && session.getString(ACCESS_TOKEN).isNotEmpty()){
+                val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else if(session.getBoolean(IS_USER_SEEN_ONBOARDING_SCREEN ) && session.getString(ACCESS_TOKEN).isEmpty()){
+                val intent = Intent(this@SplashScreenActivity, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                val intent = Intent(this@SplashScreenActivity, OnBoardingActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }, 2000)
     }
 

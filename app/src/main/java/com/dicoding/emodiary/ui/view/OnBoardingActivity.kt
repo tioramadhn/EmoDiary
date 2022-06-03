@@ -8,6 +8,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivityOnBoardingBinding
+import com.dicoding.emodiary.utils.IS_USER_SEEN_ONBOARDING_SCREEN
+import com.dicoding.emodiary.utils.SessionManager
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
@@ -17,6 +19,8 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupView()
         binding.btnMulai.setOnClickListener {
+            val session = SessionManager(this)
+            session.setBoolean(IS_USER_SEEN_ONBOARDING_SCREEN, true)
             val intent = Intent(this@OnBoardingActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
