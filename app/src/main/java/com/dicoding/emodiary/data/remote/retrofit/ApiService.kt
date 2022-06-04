@@ -1,6 +1,7 @@
 package com.dicoding.emodiary.data.remote.retrofit
 
 import com.dicoding.emodiary.data.remote.body.RefreshTokenBody
+import com.dicoding.emodiary.data.remote.body.RegisterBody
 import com.dicoding.emodiary.data.remote.response.DiariesResponse
 import com.dicoding.emodiary.data.remote.response.LoginResponse
 import com.dicoding.emodiary.data.remote.response.RefreshAccessTokenResponse
@@ -15,12 +16,9 @@ interface ApiService {
         @Field("password") password: String
     ): LoginResponse
 
-    @FormUrlEncoded
     @POST("/users")
     suspend fun register(
-        @Field("email") email: String,
-        @Field("fullname") fullname: String,
-        @Field("password") password: String
+        @Body registerBody: RegisterBody
     ): RegisterResponse
 
     @POST("/authentications/refresh")

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
+import com.dicoding.emodiary.data.remote.body.RegisterBody
 import com.dicoding.emodiary.databinding.ActivityRegisterBinding
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
@@ -59,7 +60,8 @@ class RegisterActivity : AppCompatActivity() {
                         passwordEditTextLayout.error = validPassword.first
                     }
                     else -> {
-                        viewModel.register(email, name, password).observe(this@RegisterActivity) {
+                        val registerBody = RegisterBody(email, name, password)
+                        viewModel.register(registerBody).observe(this@RegisterActivity) {
                             when (it) {
                                 is State.Loading -> {
                                     progressBar.visibility = View.VISIBLE
@@ -103,15 +105,11 @@ class RegisterActivity : AppCompatActivity() {
                                     ).show()
                                     Log.d("Response REGISTER ERROR", it.error)
                                 }
-
                                 else -> {}
                             }
                         }
-
                     }
-
                 }
-
             }
         }
     }

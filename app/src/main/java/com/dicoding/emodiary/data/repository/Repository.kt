@@ -1,5 +1,6 @@
 package com.dicoding.emodiary.data.repository
 
+import com.dicoding.emodiary.data.remote.body.RegisterBody
 import com.dicoding.emodiary.data.remote.retrofit.ApiService
 
 class Repository(private val apiService: ApiService) : BaseRepository() {
@@ -8,8 +9,8 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
         apiService.login(email, password)
     }
 
-    fun register(email: String, fullname: String, password: String) = safeApiCall {
-        apiService.register(email, fullname, password)
+    fun register(registerBody: RegisterBody) = safeApiCall {
+        apiService.register(registerBody)
     }
 
     fun getDiaries(page: Int, size: Int) = safeApiCall {
