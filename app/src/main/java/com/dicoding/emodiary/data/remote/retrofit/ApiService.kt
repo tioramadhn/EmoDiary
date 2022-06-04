@@ -1,11 +1,9 @@
 package com.dicoding.emodiary.data.remote.retrofit
 
+import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
 import com.dicoding.emodiary.data.remote.body.RefreshTokenBody
 import com.dicoding.emodiary.data.remote.body.RegisterBody
-import com.dicoding.emodiary.data.remote.response.DiariesResponse
-import com.dicoding.emodiary.data.remote.response.LoginResponse
-import com.dicoding.emodiary.data.remote.response.RefreshAccessTokenResponse
-import com.dicoding.emodiary.data.remote.response.RegisterResponse
+import com.dicoding.emodiary.data.remote.response.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -31,4 +29,32 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): DiariesResponse
+
+    @POST("/diaries")
+    suspend fun createDiary(
+        @Body createDiaryBody: CreateDiaryBody
+    ): DiaryResponse
+
+    @GET("/diaries/{id}")
+    suspend fun getDiary(
+        @Path("id") id: String
+    ): DiaryResponse
+
+    @DELETE("/diaries/{id}")
+    suspend fun deleteDiary(
+        @Path("id") id: String
+    ): DiaryResponse
+
+    @PATCH("/diaries/{id}")
+    suspend fun updateDiary(
+        @Path("id") id: String,
+        @Body updateDiaryBody: CreateDiaryBody
+    ): DiaryResponse
+
+    @GET("/articles")
+    suspend fun getArticles(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("emotions") emotions: List<String>
+    ): ArticlesResponse
 }
