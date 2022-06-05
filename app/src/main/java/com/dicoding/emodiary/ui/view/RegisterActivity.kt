@@ -19,6 +19,7 @@ import com.dicoding.emodiary.utils.State
 import com.dicoding.emodiary.utils.isEmailValid
 import com.dicoding.emodiary.utils.isPasswordValid
 import com.dicoding.emodiary.utils.onAlertDialog
+import java.time.temporal.TemporalAdjusters.next
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -81,10 +82,10 @@ class RegisterActivity : AppCompatActivity() {
                                     Log.d("Response REGIS SUCCESS", data.toString())
                                     onAlertDialog(
                                         this@RegisterActivity,
-                                        "Daftar Berhasil",
-                                        "Silahkan login terlebih dahulu",
-                                        "back",
-                                        "next"
+                                        getString(R.string.regist_success_msg),
+                                        getString(R.string.regist_success_msg_desc),
+                                        getString(R.string.back),
+                                        getString(R.string.next)
                                     ) {
                                         startActivity(
                                             Intent(

@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="@string/title_menu_1"
-        android:textColor="@color/blue_sky"
+        android:textColor="@color/emo_primary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu1"
@@ -38,7 +38,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="@string/desc_menu_1"
-        android:textColor="@color/blue_sky"
+        android:textColor="@color/emo_primary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu1"
         app:layout_constraintStart_toStartOf="@+id/titleMenu1"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:textColor="@color/blue_sky"
+        android:textColor="@color/emo_primary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu2"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:textColor="@color/blue_sky"
+        android:textColor="@color/emo_primary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu2"
         app:layout_constraintStart_toStartOf="@+id/titleMenu2"
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:textColor="@color/blue_sky"
+        android:textColor="@color/emo_primary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/logoMenu3"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:textColor="@color/blue_sky"
+        android:textColor="@color/emo_primary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/titleMenu3"
         app:layout_constraintStart_toStartOf="@+id/titleMenu3"
@@ -130,7 +130,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:srcCompat="@drawable/ic_circle_24"
-        app:tint="@color/blue_sky" />
+        app:tint="@color/emo_primary" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu2"
@@ -144,7 +144,7 @@
         app:layout_constraintTop_toTopOf="@+id/menu1"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_circle_24"
-        app:tint="@color/blue_sky" />
+        app:tint="@color/emo_primary" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/menu3"
@@ -157,7 +157,7 @@
         app:layout_constraintTop_toTopOf="@+id/menu2"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_circle_24"
-        app:tint="@color/blue_sky" />
+        app:tint="@color/emo_primary" />
 
 
     <Button
@@ -167,7 +167,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:alpha="0"
-        android:backgroundTint="@color/blue_sky"
+        android:backgroundTint="@color/emo_primary"
         android:text="@string/mulai"
         app:layout_constraintBottom_toTopOf="@+id/menu2"
         app:layout_constraintEnd_toEndOf="parent"

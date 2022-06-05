@@ -45,4 +45,22 @@
     <string name="mood_kamu_hari_ini">Mood kamu hari ini</string>
     <string name="mood">Senang</string>
     <string name="say_halo">Halo, %1s</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="judul_diary">Judul Diary</string>
+    <string name="judul_hint">Masukkan judul diary disini...</string>
+    <string name="content_hint">Ceritakan disini..</string>
+    <string name="title_edit_dialog">Apakah anda ingin membatalkan perubahan pada form?</string>
+    <string name="title_contentEdit_dialog">Klik lanjut untuk membatalkan perubahan</string>
+    <string name="regist_success_msg_desc">Silahkan login terlebih dahulu</string>
+    <string name="back">back</string>
+    <string name="next">next</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_search">Search</string>
+    <string name="title_article">Article</string>
+    <string name="settings">Settings</string>
 </resources>

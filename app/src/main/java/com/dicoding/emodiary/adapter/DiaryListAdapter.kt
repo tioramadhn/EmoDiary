@@ -1,5 +1,6 @@
 package com.dicoding.storyapp.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.emodiary.data.remote.response.DiaryItem
 import com.dicoding.emodiary.databinding.ItemDiaryBinding
+import com.dicoding.emodiary.ui.view.AddOrEditDiaryActivity
 import com.dicoding.emodiary.utils.withDateFormat
 
 class DiaryListAdapter :
@@ -33,12 +35,13 @@ class DiaryListAdapter :
             binding.tvDateDiary.text = data.timeCreated?.withDateFormat()
             binding.tvDiaryTitle.text = data.title
             binding.tvDiaryDesc.text = data.content
-//            itemView.setOnClickListener {
-//
-//                val moveWithObjectIntent = Intent(itemView.context, DetailActivity::class.java)
-//                moveWithObjectIntent.putExtra(DetailActivity.EXTRA_PERSON, data)
-//                itemView.context.startActivity(moveWithObjectIntent)
-//            }
+
+            itemView.setOnClickListener {
+                val moveWithObjectIntent = Intent(itemView.context, AddOrEditDiaryActivity::class.java)
+                moveWithObjectIntent.putExtra(AddOrEditDiaryActivity.EXTRA_DIARY, data)
+                itemView.context.startActivity(moveWithObjectIntent)
+            }
+
         }
     }
 

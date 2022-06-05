@@ -1,55 +1,43 @@
 package com.dicoding.emodiary.ui.view
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivityMainBinding
-import com.dicoding.emodiary.ui.viewmodel.MainViewModel
-import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
-import com.dicoding.emodiary.utils.DataDummy
-import com.dicoding.emodiary.utils.SessionManager
-import com.dicoding.emodiary.utils.getDateNow
-import com.dicoding.storyapp.adapter.DiaryListAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
-    private val mainViewModel: MainViewModel by viewModels {
-        ViewModelFactory.getInstance(this)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        setupView()
-    }
+        //Go to add diary
+        binding.fab.setOnClickListener{
+            startActivity(Intent(this, AddOrEditDiaryActivity::class.java))
+        }
 
-    private fun setupView() {
-
-        val session = SessionManager(this)
-
-        //Set profile picture
-        Glide.with(binding.imgProfil.context)
-            .load(R.drawable.default_profile)
-            .circleCrop()
-            .into(binding.imgProfil)
-
-        //Set say halo
-        binding.tvHalo.text = getString(R.string.say_halo, session.getString("fullname"))
-
-        //Set Date Now
-        binding.tvDateNow.text = getDateNow()
-
-        //Set all diary of user
-        val adapter = DiaryListAdapter()
-        binding.rvDiary.layoutManager = LinearLayoutManager(this@MainActivity)
-        adapter.submitList(DataDummy.generateDummyDiaryResponse())
-        binding.rvDiary.adapter = adapter
-
+        val navView: BottomNavigationView = binding.bottomNavigationView
+        navView.background = null
+        val navController = findNavController(R.id.nav_host_fragment_activity_home)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_profile, R.id.navigation_search, R.id.navigation_article
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 }
