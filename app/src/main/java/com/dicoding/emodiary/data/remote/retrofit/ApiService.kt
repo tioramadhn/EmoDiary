@@ -25,10 +25,7 @@ interface ApiService {
     ): RefreshAccessTokenResponse
 
     @GET("/diaries")
-    suspend fun getDiaries(
-        @Query("page") page: Int,
-        @Query("size") size: Int
-    ): DiariesResponse
+    suspend fun getDiaries(): DiariesResponse
 
     @POST("/diaries")
     suspend fun createDiary(
@@ -53,8 +50,6 @@ interface ApiService {
 
     @GET("/articles")
     suspend fun getArticles(
-        @Query("page") page: Int,
-        @Query("size") size: Int,
         @Query("emotions") emotions: List<String>
     ): ArticlesResponse
 }
