@@ -81,5 +81,7 @@
     <string name="fear">Fear</string>
     <string name="love">Love</string>
     <string name="surprise">Surprise</string>
+    <string name="title_delete_dialog">Apakah anda yakin ingin menghapus ?</string>
+    <string name="content_delete_dialog">Klik lanjut untuk menghapus diary</string>
 
 </resources>

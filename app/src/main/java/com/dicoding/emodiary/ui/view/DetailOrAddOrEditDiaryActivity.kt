@@ -68,17 +68,53 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
         }
 
         binding.btnSubmit.setOnClickListener {
-            if(isAdd){
-                val title = binding.titleEditText.text.toString()
-                val content = binding.contentEditText.text.toString()
+            val title = binding.titleEditText.text.toString()
+            val content = binding.contentEditText.text.toString()
+            val diaryBody = CreateDiaryBody(title, content)
 
-
-                when{
-                    title.isEmpty() -> binding.titleEditTextLayout.error = getString(R.string.title_is_empty)
-                    content.isEmpty() -> binding.contentEditTextLayout.error = getString(R.string.content_is_empty)
-                    else -> {
-
+            when {
+                title.isEmpty() -> binding.titleEditTextLayout.error =
+                    getString(R.string.title_is_empty)
+                content.isEmpty() -> binding.contentEditTextLayout.error =
+                    getString(R.string.content_is_empty)
+                else -> {
+                    if (isAdd) {
                         createDiary(title, content)
+                    } else if (isEdit) {
+                        updateDiary(diary?.id, diaryBody)
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    private fun updateDiary(id: String?, diaryBody: CreateDiaryBody) {
+        if (id != null) {
+            viewModel.updateDiary(id, diaryBody).observe(this){
+                when(it){
+                    is State.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is State.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        val result = it.data
+                        Toast.makeText(
+                            this@DetailOrAddOrEditDiaryActivity,
+                            result.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
+                    is State.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(
+                            this@DetailOrAddOrEditDiaryActivity,
+                            it.error,
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -87,8 +123,8 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
 
     private fun createDiary(title: String, content: String) {
         val diaryBody = CreateDiaryBody(title, content)
-        viewModel.createDiary(diaryBody).observe(this){
-            when(it){
+        viewModel.createDiary(diaryBody).observe(this) {
+            when (it) {
                 is State.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
@@ -161,8 +197,8 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
             R.id.menu_delete -> {
                 onAlertDialog(
                     this,
-                    getString(R.string.title_edit_dialog),
-                    getString(R.string.title_contentEdit_dialog),
+                    getString(R.string.title_delete_dialog),
+                    getString(R.string.content_delete_dialog),
                     getString(R.string.back),
                     getString(R.string.next)
                 ) {
@@ -177,8 +213,8 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
 
     private fun deleteDiary() {
         diary?.id?.let {
-            viewModel.deleteDiary(it).observe(this) { it ->
-                when (it) {
+            viewModel.deleteDiary(it).observe(this) { state ->
+                when (state) {
                     is State.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
@@ -196,7 +232,7 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(
                             this@DetailOrAddOrEditDiaryActivity,
-                            it.error,
+                            state.error,
                             Toast.LENGTH_LONG
                         ).show()
                     }
