@@ -14,8 +14,8 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
         apiService.register(registerBody)
     }
 
-    fun getDiaries(page: Int, size: Int) = safeApiCall {
-        apiService.getDiaries(page, size)
+    fun getDiaries() = safeApiCall {
+        apiService.getDiaries()
     }
 
     fun createDiary(createDiaryBody: CreateDiaryBody) = safeApiCall {
@@ -34,8 +34,8 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
         apiService.updateDiary(id, createDiaryBody)
     }
 
-    fun getArticles(page: Int, size: Int, emotions: List<String>) = safeApiCall {
-        apiService.getArticles(page, size, emotions)
+    fun getArticles(emotions: List<String>) = safeApiCall {
+        apiService.getArticles(emotions)
     }
 
     companion object {
