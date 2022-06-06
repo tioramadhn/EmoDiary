@@ -66,12 +66,12 @@ class RegisterActivity : AppCompatActivity() {
                             when (it) {
                                 is State.Loading -> {
                                     progressBar.visibility = View.VISIBLE
-                                    btnDaftar.isEnabled = false
+                                    btnDaftar.visibility = View.GONE
                                     btnDaftarGoogle.isEnabled = false
                                 }
                                 is State.Success -> {
                                     progressBar.visibility = View.GONE
-                                    btnDaftar.isEnabled = true
+                                    btnDaftar.visibility = View.VISIBLE
                                     btnDaftarGoogle.isEnabled = true
                                     val data = it.data
                                     Toast.makeText(
@@ -97,7 +97,7 @@ class RegisterActivity : AppCompatActivity() {
                                 }
                                 is State.Error -> {
                                     progressBar.visibility = View.GONE
-                                    btnDaftar.isEnabled = true
+                                    btnDaftar.visibility = View.VISIBLE
                                     btnDaftarGoogle.isEnabled = true
                                     Toast.makeText(
                                         this@RegisterActivity,

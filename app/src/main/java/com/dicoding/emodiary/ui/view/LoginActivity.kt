@@ -59,12 +59,12 @@ class LoginActivity : AppCompatActivity() {
                             when (it) {
                                 is State.Loading -> {
                                     progressBar.visibility = View.VISIBLE
-                                    btnMasuk.isEnabled = false
+                                    btnMasuk.visibility = View.GONE
                                     btnMasukGoogle.isEnabled = false
                                 }
                                 is State.Success -> {
                                     progressBar.visibility = View.GONE
-                                    btnMasuk.isEnabled = true
+                                    btnMasuk.visibility = View.VISIBLE
                                     btnMasukGoogle.isEnabled = true
                                     val data = it.data
                                     Toast.makeText(
@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                                 }
                                 is State.Error -> {
                                     progressBar.visibility = View.GONE
-                                    btnMasuk.isEnabled = true
+                                    btnMasuk.visibility = View.VISIBLE
                                     btnMasukGoogle.isEnabled = true
                                     Toast.makeText(
                                         this@LoginActivity,
