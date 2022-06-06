@@ -24,7 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         //Go to add diary
         binding.fab.setOnClickListener{
-            startActivity(Intent(this, AddOrEditDiaryActivity::class.java))
+            val intent = Intent(this, DetailOrAddOrEditDiaryActivity::class.java)
+            intent.putExtra(DetailOrAddOrEditDiaryActivity.FLAG_ADD, true)
+            startActivity(intent)
         }
 
         val navView: BottomNavigationView = binding.bottomNavigationView

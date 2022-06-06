@@ -63,7 +63,17 @@
     <string name="title_search">Search</string>
     <string name="title_article">Article</string>
     <string name="settings">Settings</string>
-
+    <string name="upload_on">Dibuat pada %1s</string>
+    <string name="menu_delete">Delete</string>
+    <string name="tambah_diary">Tambah Diary</string>
+    <string name="delete_success_msg">Diary berhasil dihapus</string>
+    <string name="delete_failed_msg">Diary gagal dihapus</string>
+    <string name="desc_no_diary">Biarkan EmoDiary membantu dalam menyelesaikan \nmasalah terkait perasaanmu</string>
+    <string name="title_no_diary">Belom ada Diary nich..</string>
+    <string name="get_diary_fail">Diary gagal didapatkan</string>
+    <string name="title_is_empty">Judul tidak boleh kosong</string>
+    <string name="content_is_empty">Isi diary tidak boleh kosong</string>
+    <string name="content_diary">Isi diary</string>
     <!--  Emotions  -->
     <string name="sadness">Sadness</string>
     <string name="joy">Joy</string>
@@ -71,4 +81,5 @@
     <string name="fear">Fear</string>
     <string name="love">Love</string>
     <string name="surprise">Surprise</string>
+
 </resources>

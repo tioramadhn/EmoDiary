@@ -16,6 +16,7 @@ fun String.withDateFormat(): String {
             throw IllegalArgumentException("Unparseable date")
         }
         val date = format.parse(this) as Date
+
         return DateFormat.getDateInstance(DateFormat.LONG).format(date)
     } catch (e: ParseException) {
         Log.d("Parse error", e.toString())

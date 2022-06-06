@@ -106,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
             refreshToken?.let { session.setString(REFRESH_TOKEN, it) }
             photo?.let { session.setString("photo", it) }
             fullname?.let { session.setString("fullname", it) }
+            id?.let { session.setString("user_id", it) }
         }
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

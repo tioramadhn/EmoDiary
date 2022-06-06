@@ -15,7 +15,7 @@
             android:name=".ui.view.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.AddOrEditDiaryActivity"
+            android:name=".ui.view.DetailOrAddOrEditDiaryActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.MainActivity"
