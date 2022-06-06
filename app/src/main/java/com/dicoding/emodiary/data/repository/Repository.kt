@@ -22,6 +22,10 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
         apiService.createDiary(createDiaryBody)
     }
 
+    fun getEmotions() = safeApiCall {
+        apiService.getEmotions()
+    }
+
     fun getDiary(id: String) = safeApiCall {
         apiService.getDiary(id)
     }

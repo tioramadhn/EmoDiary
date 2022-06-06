@@ -17,39 +17,42 @@ interface ApiService {
     @POST("/users")
     suspend fun register(
         @Body registerBody: RegisterBody
-    ): RegisterResponse
+    ): BaseResponse<RegisterItem>
 
     @POST("/authentications/refresh")
     suspend fun refreshAccessToken(
         @Body refreshToken: RefreshTokenBody
-    ): RefreshAccessTokenResponse
+    ): BaseResponse<RefreshAccessTokenItem?>
 
     @GET("/diaries")
-    suspend fun getDiaries(): DiariesResponse
+    suspend fun getDiaries(): BaseResponse<List<DiaryItem?>>
 
     @POST("/diaries")
     suspend fun createDiary(
         @Body createDiaryBody: CreateDiaryBody
-    ): DiaryResponse
+    ): BaseResponse<DiaryItem?>
+
+    @GET("diaries/emotions")
+    suspend fun getEmotions(): BaseResponse<EmotionItem?>
 
     @GET("/diaries/{id}")
     suspend fun getDiary(
         @Path("id") id: String
-    ): DiaryResponse
+    ): BaseResponse<DiaryItem?>
 
     @DELETE("/diaries/{id}")
     suspend fun deleteDiary(
         @Path("id") id: String
-    ): DiaryResponse
+    ): BaseResponse<DiaryItem?>
 
     @PATCH("/diaries/{id}")
     suspend fun updateDiary(
         @Path("id") id: String,
         @Body updateDiaryBody: CreateDiaryBody
-    ): DiaryResponse
+    ): BaseResponse<DiaryItem?>
 
     @GET("/articles")
     suspend fun getArticles(
         @Query("emotions") emotions: List<String>
-    ): ArticlesResponse
+    ): BaseResponse<ArticleItem?>
 }

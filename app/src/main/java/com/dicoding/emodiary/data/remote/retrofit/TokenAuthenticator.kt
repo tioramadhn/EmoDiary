@@ -4,8 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.data.remote.body.RefreshTokenBody
-import com.dicoding.emodiary.data.remote.response.ErrorMessageResponse
-import com.dicoding.emodiary.data.remote.response.RefreshAccessTokenResponse
+import com.dicoding.emodiary.data.remote.response.BaseResponse
+import com.dicoding.emodiary.data.remote.response.ErrorMessageItem
+import com.dicoding.emodiary.data.remote.response.RefreshAccessTokenItem
 import com.dicoding.emodiary.data.remote.retrofit.ApiConfig.BASE_URL
 import com.dicoding.emodiary.utils.ACCESS_TOKEN
 import com.dicoding.emodiary.utils.REFRESH_TOKEN
@@ -41,7 +42,7 @@ class TokenAuthenticator(context: Context) : Authenticator {
         }
     }
 
-    private suspend fun refreshAccessToken(): State<RefreshAccessTokenResponse> {
+    private suspend fun refreshAccessToken(): State<BaseResponse<RefreshAccessTokenItem?>> {
         val refreshToken = sessionManager.getString(REFRESH_TOKEN)
         val refreshTokenBody = RefreshTokenBody(refreshToken)
 
@@ -69,7 +70,7 @@ class TokenAuthenticator(context: Context) : Authenticator {
                     is HttpException -> {
                         val error = Gson().fromJson(
                             throwable.response()?.errorBody()?.string(),
-                            ErrorMessageResponse::class.java
+                            ErrorMessageItem::class.java
                         )
                         State.Error(error.message ?: R.string.network_error.toString())
                     }
