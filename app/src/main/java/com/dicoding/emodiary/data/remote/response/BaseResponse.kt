@@ -2,16 +2,11 @@ package com.dicoding.emodiary.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RefreshAccessTokenResponse(
+data class BaseResponse <T>(
 
     @field:SerializedName("message")
     val message: String? = null,
 
     @field:SerializedName("data")
-    val data: RefreshAccessTokenData? = null
+    val data: T? = null,
 )
-
-data class RefreshAccessTokenData(
-    val accessToken: String? = null
-)
-

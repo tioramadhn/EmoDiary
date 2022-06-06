@@ -2,7 +2,7 @@ package com.dicoding.emodiary.data.repository
 
 import androidx.lifecycle.liveData
 import com.dicoding.emodiary.R
-import com.dicoding.emodiary.data.remote.response.ErrorMessageResponse
+import com.dicoding.emodiary.data.remote.response.ErrorMessageItem
 import com.dicoding.emodiary.utils.State
 import com.google.gson.Gson
 import retrofit2.HttpException
@@ -20,7 +20,7 @@ open class BaseRepository {
                 is HttpException -> {
                     val error = Gson().fromJson(
                         throwable.response()?.errorBody()?.string(),
-                        ErrorMessageResponse::class.java
+                        ErrorMessageItem::class.java
                     )
                     emit(State.Error(error.message ?: R.string.network_error.toString()))
                 }
