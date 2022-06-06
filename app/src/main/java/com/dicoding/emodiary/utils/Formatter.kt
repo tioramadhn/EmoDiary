@@ -6,7 +6,6 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun String.withDateFormat(): String {
@@ -37,4 +36,16 @@ fun getDateNow(): String {
     val formatted = "${current.dayOfWeek}, ${current.dayOfMonth} ${current.month} ${current.year}".lowercase()
     val words = formatted.split(' ');
     return words.joinToString(separator = " ") { word -> word.replaceFirstChar { it.uppercase() } }
+}
+
+fun getIconFromEmotion(emotion: String): String {
+    return when (emotion) {
+        "sadness" -> "😢"
+        "joy" -> "😄"
+        "anger" -> "😡"
+        "fear" -> "🙁"
+        "love" -> "😍"
+        "surprise" -> "😱"
+        else -> ""
+    }
 }

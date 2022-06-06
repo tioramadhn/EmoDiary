@@ -4,6 +4,7 @@ import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
 import com.dicoding.emodiary.data.remote.body.RefreshTokenBody
 import com.dicoding.emodiary.data.remote.body.RegisterBody
 import com.dicoding.emodiary.data.remote.response.*
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -17,7 +18,14 @@ interface ApiService {
     @POST("/users")
     suspend fun register(
         @Body registerBody: RegisterBody
-    ): BaseResponse<RegisterItem>
+    ): BaseResponse<UserItem>
+
+    @Multipart
+    @POST("/users/{id}/photo")
+    suspend fun uploadPhoto(
+        @Path("id") id: String,
+        @Part photo: MultipartBody.Part
+    ): BaseResponse<UserItem?>
 
     @POST("/authentications/refresh")
     suspend fun refreshAccessToken(

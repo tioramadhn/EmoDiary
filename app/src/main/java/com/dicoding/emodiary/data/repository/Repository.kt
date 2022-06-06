@@ -3,6 +3,7 @@ package com.dicoding.emodiary.data.repository
 import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
 import com.dicoding.emodiary.data.remote.body.RegisterBody
 import com.dicoding.emodiary.data.remote.retrofit.ApiService
+import okhttp3.MultipartBody
 
 class Repository(private val apiService: ApiService) : BaseRepository() {
 
@@ -40,6 +41,10 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
 
     fun getArticles(emotions: List<String>) = safeApiCall {
         apiService.getArticles(emotions)
+    }
+
+    fun uploadPhoto(id: String, photo: MultipartBody.Part) = safeApiCall {
+        apiService.uploadPhoto(id, photo)
     }
 
     companion object {

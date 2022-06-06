@@ -29,5 +29,8 @@ data class DiaryItem(
     val userId: String? = null,
 
     @field:SerializedName("content")
-    val content: String? = null
-): Parcelable
+    val content: String? = null,
+
+    @field:SerializedName("articles")
+    val articles: List<ArticleItem?>? = null,
+) : Parcelable

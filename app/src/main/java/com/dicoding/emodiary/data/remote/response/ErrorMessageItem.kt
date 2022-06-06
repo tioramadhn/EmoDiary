@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ErrorMessageItem(
 
-	@field:SerializedName("message")
-	val message: String? = null
+    @field:SerializedName("message")
+    val message: String? = null
 )
