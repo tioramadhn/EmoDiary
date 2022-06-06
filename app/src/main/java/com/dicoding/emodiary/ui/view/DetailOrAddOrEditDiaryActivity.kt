@@ -67,6 +67,15 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
             }
         }
 
+        binding.titleEditText.setOnFocusChangeListener{_, hasFocus ->
+            if(hasFocus) binding.titleEditTextLayout.hint = null
+            else binding.titleEditText.hint = getString(R.string.judul_hint)
+        }
+
+        binding.contentEditText.setOnFocusChangeListener{_, hasFocus ->
+            if(hasFocus) binding.contentEditTextLayout.hint = null
+            else binding.contentEditText.hint = getString(R.string.content_hint)
+        }
         binding.btnSubmit.setOnClickListener {
             val title = binding.titleEditText.text.toString()
             val content = binding.contentEditText.text.toString()

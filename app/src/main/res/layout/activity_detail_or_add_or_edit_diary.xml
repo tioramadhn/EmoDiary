@@ -26,7 +26,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:hint="@string/judul_hint"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +33,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEditText"
+            android:hint="@string/judul_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
@@ -61,6 +61,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:visibility="invisible"
+        android:hint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_content_diary">
@@ -69,9 +70,9 @@
             android:id="@+id/contentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/content_hint"
             android:ems="10"
             android:gravity="left|top"
-            android:hint="@string/content_hint"
             android:inputType="textMultiLine"
             android:lines="8"
             android:maxLines="10"
