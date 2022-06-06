@@ -14,4 +14,12 @@
     <string name="password_upper_case_error">Kata sandi wajib mengandung huruf kapital</string>
     <string name="password_lower_case_error">Kata sandi wajib mengandung huruf non-kapital</string>
     <string name="password_number_error">Kata sandi wajib mengandung angka</string>
+
+    <!--  Emotions  -->
+    <string name="sadness">Sedih</string>
+    <string name="joy">Gembira</string>
+    <string name="anger">Marah</string>
+    <string name="fear">Khawatir</string>
+    <string name="love">Jatuh cinta</string>
+    <string name="surprise">Penuh kejutan</string>
 </resources>

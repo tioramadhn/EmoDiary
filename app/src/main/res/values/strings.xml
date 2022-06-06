@@ -63,4 +63,12 @@
     <string name="title_search">Search</string>
     <string name="title_article">Article</string>
     <string name="settings">Settings</string>
+
+    <!--  Emotions  -->
+    <string name="sadness">Sadness</string>
+    <string name="joy">Joy</string>
+    <string name="anger">Anger</string>
+    <string name="fear">Fear</string>
+    <string name="love">Love</string>
+    <string name="surprise">Surprise</string>
 </resources>

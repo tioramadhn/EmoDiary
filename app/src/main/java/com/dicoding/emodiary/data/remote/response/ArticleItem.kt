@@ -1,7 +1,10 @@
 package com.dicoding.emodiary.data.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ArticleItem(
 
     @field:SerializedName("snippet")
@@ -36,14 +39,16 @@ data class ArticleItem(
 
     @field:SerializedName("richSnippet")
     val richSnippet: RichSnippet? = null
-)
+) : Parcelable
 
+@Parcelize
 data class RichSnippet(
 
     @field:SerializedName("top")
     val top: Top? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Top(
 
     @field:SerializedName("extensions")
@@ -51,8 +56,9 @@ data class Top(
 
     @field:SerializedName("detectedExtensions")
     val detectedExtensions: DetectedExtensions? = null
-)
+) : Parcelable
 
+@Parcelize
 data class DetectedExtensions(
 
     @field:SerializedName("langkah")
@@ -63,4 +69,4 @@ data class DetectedExtensions(
 
     @field:SerializedName("skor")
     val skor: Int? = null
-)
+) : Parcelable
