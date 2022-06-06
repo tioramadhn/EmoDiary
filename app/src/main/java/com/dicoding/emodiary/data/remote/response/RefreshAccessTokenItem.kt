@@ -7,4 +7,3 @@ data class RefreshAccessTokenItem(
     @field:SerializedName("accessToken")
     val accessToken: String? = null
 )
-

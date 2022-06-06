@@ -2,7 +2,7 @@ package com.dicoding.emodiary.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterItem(
+data class UserItem(
 
 	@field:SerializedName("role")
 	val role: String? = null,

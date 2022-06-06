@@ -30,4 +30,4 @@ data class DiaryItem(
 
     @field:SerializedName("content")
     val content: String? = null
-): Parcelable
+) : Parcelable
