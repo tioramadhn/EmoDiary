@@ -13,4 +13,6 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     fun createDiary(diaryBody: CreateDiaryBody) = repository.createDiary(diaryBody)
     fun getDiary(id: String) = repository.getDiary(id)
     fun updateDiary(id: String, diaryBody: CreateDiaryBody) = repository.updateDiary(id, diaryBody)
+    fun getEmotions() = repository.getEmotions()
+    fun getArticles(emotions: List<String> ) = repository.getArticles(emotions)
 }

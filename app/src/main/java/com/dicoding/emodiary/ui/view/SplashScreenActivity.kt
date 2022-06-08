@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.utils.ACCESS_TOKEN
+import com.dicoding.emodiary.utils.DELAY
 import com.dicoding.emodiary.utils.IS_USER_SEEN_ONBOARDING_SCREEN
 import com.dicoding.emodiary.utils.SessionManager
 
@@ -34,7 +35,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }, 2000)
+        }, DELAY)
     }
 
     private fun setupView() {

@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                             when (it) {
                                 is State.Loading -> {
                                     progressBar.visibility = View.VISIBLE
-                                    btnMasuk.visibility = View.GONE
+                                    btnMasuk.visibility = View.INVISIBLE
                                     btnMasukGoogle.isEnabled = false
                                 }
                                 is State.Success -> {
@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
             refreshToken?.let { session.setString(REFRESH_TOKEN, it) }
             photo?.let { session.setString("photo", it) }
             fullname?.let { session.setString("fullname", it) }
-            id?.let { session.setString("user_id", it) }
+            id?.let { session.setString(USER_ID, it) }
         }
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

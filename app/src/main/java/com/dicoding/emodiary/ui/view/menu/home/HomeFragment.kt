@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +15,7 @@ import com.dicoding.emodiary.databinding.FragmentHomeBinding
 import com.dicoding.emodiary.ui.view.SettingsActivity
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
-import com.dicoding.emodiary.utils.DataDummy
-import com.dicoding.emodiary.utils.SessionManager
-import com.dicoding.emodiary.utils.State
-import com.dicoding.emodiary.utils.getDateNow
+import com.dicoding.emodiary.utils.*
 import com.dicoding.storyapp.adapter.DiaryListAdapter
 
 class HomeFragment : Fragment() {
@@ -44,6 +40,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
         setupView()
         setupAction()
+        getEmotions()
         return root
     }
 
@@ -68,7 +65,7 @@ class HomeFragment : Fragment() {
         binding.tvHalo.text = getString(R.string.say_halo, session.getString("fullname"))
 
         //Set Date Now
-        binding.tvDateNow.text = getDateNow()
+        binding.tvDateNow.text = getDateNow().toString().withDateFormat()
 
         //Set all diary of user
         val adapter = DiaryListAdapter()
@@ -108,6 +105,33 @@ class HomeFragment : Fragment() {
 
 
 
+    }
+
+    private fun getEmotions() {
+        viewModel.getEmotions().observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Loading -> {
+                    binding.tvYourMoodToday.text = "loading..."
+                    binding.imgMood.text = myEmotion(requireActivity(), "unknown").second
+                }
+                is State.Success -> {
+                    val res = it.data.data
+                    if (res != null) {
+                        binding.tvYourMoodToday.text = myEmotion(
+                            requireActivity(),
+                            res.emotion.toString()
+                        ).first
+                        binding.imgMood.text =
+                            myEmotion(requireActivity(), res.emotion.toString()).second
+                    }
+                }
+                is State.Error -> {
+                    binding.tvYourMoodToday.text = "Something wrong.."
+                    binding.imgMood.text = myEmotion(requireActivity(), "unknown").second
+                }
+            }
+
+        }
     }
 
     override fun onDestroyView() {

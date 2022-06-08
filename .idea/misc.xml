@@ -3,29 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.193" />
         <entry key="app/src/main/res/drawable/card.xml" value="0.114" />
         <entry key="app/src/main/res/drawable/ic_circle_24.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/ic_circle_full_24.xml" value="0.2015" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.193" />
         <entry key="app/src/main/res/drawable/shape_rectangle.xml" value="0.1995" />
         <entry key="app/src/main/res/drawable/shape_rectangle_contained_blue.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/shape_rectangle_outlined.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/shape_rectangle_outlined_grey.xml" value="0.2015" />
         <entry key="app/src/main/res/layout/activity_add_or_edit_diary.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_detail_or_add_or_edit_diary.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_detail_or_add_or_edit_diary.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_on_boarding.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_web_view.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_article.xml" value="0.17864583333333334" />
+        <entry key="app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.19375" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18716577540106952" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/item_article.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_diary.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/under_development.xml" value="0.2" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.19375" />
         <entry key="app/src/main/res/menu/option_menu.xml" value="0.19375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.147" />

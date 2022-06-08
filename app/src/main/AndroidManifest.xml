@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Emodiary">
         <activity
+            android:name=".ui.view.WebViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.SettingsActivity"
             android:exported="false" />
         <activity

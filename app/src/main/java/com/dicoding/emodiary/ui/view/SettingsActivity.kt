@@ -6,13 +6,15 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivitySettingsBinding
+import com.dicoding.emodiary.databinding.UnderDevelopmentBinding
 import com.dicoding.emodiary.utils.onAlertDialog
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySettingsBinding
+//    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var binding: UnderDevelopmentBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        binding = UnderDevelopmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.settings)

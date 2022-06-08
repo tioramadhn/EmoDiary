@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -22,17 +23,18 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
-
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textProfile
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return inflater.inflate(R.layout.under_development, container, false)
+//        val profileViewModel =
+//            ViewModelProvider(this).get(ProfileViewModel::class.java)
+//
+//        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+//        val root: View = binding.root
+//
+//        val textView: TextView = binding.textProfile
+//        profileViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
+//        return root
     }
 
     override fun onDestroyView() {

@@ -81,7 +81,18 @@
     <string name="fear">Fear</string>
     <string name="love">Love</string>
     <string name="surprise">Surprise</string>
+
+    <string name="emo_joy">😀</string>
+    <string name="emo_sadness">😥</string>
+    <string name="emo_anger">😠</string>
+    <string name="emo_fear">😨</string>
+    <string name="emo_love">🥰</string>
+    <string name="emo_surprise">😯</string>
+
     <string name="title_delete_dialog">Apakah anda yakin ingin menghapus ?</string>
     <string name="content_delete_dialog">Klik lanjut untuk menghapus diary</string>
+    <string name="mood_kamu_sedang">Mood kamu sedang :</string>
+    <string name="unknown_emo">Mood tidak diketahui</string>
+    <string name="emo_unknown">🤔</string>
 
 </resources>

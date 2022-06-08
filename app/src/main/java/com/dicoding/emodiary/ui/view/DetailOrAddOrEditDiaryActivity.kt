@@ -1,15 +1,18 @@
 package com.dicoding.emodiary.ui.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
+import com.dicoding.emodiary.data.remote.response.BaseResponse
 import com.dicoding.emodiary.data.remote.response.DiaryItem
 import com.dicoding.emodiary.databinding.ActivityDetailOrAddOrEditDiaryBinding
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
@@ -67,20 +70,28 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
             }
         }
 
-        binding.titleEditText.setOnFocusChangeListener{_, hasFocus ->
-            if(hasFocus) binding.titleEditTextLayout.hint = null
+        binding.titleEditText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus || binding.titleEditText.text?.isNotEmpty() == true) binding.titleEditTextLayout.hint =
+                null
             else binding.titleEditText.hint = getString(R.string.judul_hint)
         }
 
-        binding.contentEditText.setOnFocusChangeListener{_, hasFocus ->
-            if(hasFocus) binding.contentEditTextLayout.hint = null
+        binding.contentEditText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus || binding.contentEditText.text?.isNotEmpty() == true) binding.contentEditTextLayout.hint =
+                null
             else binding.contentEditText.hint = getString(R.string.content_hint)
         }
+
         binding.btnSubmit.setOnClickListener {
+            it.hideKeyboard()
+
             val title = binding.titleEditText.text.toString()
             val content = binding.contentEditText.text.toString()
+            if(title.isNotEmpty() && content.isNotEmpty()){
+                binding.progressBar.visibility = View.VISIBLE
+                binding.btnSubmit.visibility = View.INVISIBLE
+            }
             val diaryBody = CreateDiaryBody(title, content)
-
             when {
                 title.isEmpty() -> binding.titleEditTextLayout.error =
                     getString(R.string.title_is_empty)
@@ -99,26 +110,33 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
         }
     }
 
+   private fun View.hideKeyboard() {
+        val inputManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(windowToken, 0)
+    }
+
     private fun updateDiary(id: String?, diaryBody: CreateDiaryBody) {
         if (id != null) {
-            viewModel.updateDiary(id, diaryBody).observe(this){
-                when(it){
+            viewModel.updateDiary(id, diaryBody).observe(this) {
+                when (it) {
                     is State.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     is State.Success -> {
                         binding.progressBar.visibility = View.GONE
+                        binding.btnSubmit.visibility = View.VISIBLE
                         val result = it.data
                         Toast.makeText(
                             this@DetailOrAddOrEditDiaryActivity,
                             result.message,
                             Toast.LENGTH_LONG
                         ).show()
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
+                        showBottomSheet(result)
                     }
                     is State.Error -> {
                         binding.progressBar.visibility = View.GONE
+                        binding.btnSubmit.visibility = View.VISIBLE
                         Toast.makeText(
                             this@DetailOrAddOrEditDiaryActivity,
                             it.error,
@@ -139,17 +157,19 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                 }
                 is State.Success -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.btnSubmit.visibility = View.VISIBLE
                     val result = it.data
                     Toast.makeText(
                         this@DetailOrAddOrEditDiaryActivity,
                         result.message,
                         Toast.LENGTH_LONG
                     ).show()
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+
+                    showBottomSheet(result)
                 }
                 is State.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.btnSubmit.visibility = View.VISIBLE
                     Toast.makeText(
                         this@DetailOrAddOrEditDiaryActivity,
                         it.error,
@@ -158,6 +178,12 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showBottomSheet(data: BaseResponse<DiaryItem?>) {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(MainActivity.EXTRA_DIARY, data.data)
+        startActivity(intent)
     }
 
     private fun showAddOrEditView(btnTitle: String) {
@@ -174,6 +200,8 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
             tvDetailTitle.visibility = View.INVISIBLE
             tvDetailContent.visibility = View.INVISIBLE
         }
+
+
     }
 
 
@@ -221,6 +249,7 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
     }
 
     private fun deleteDiary() {
+        binding.btnSubmit.visibility = View.INVISIBLE
         diary?.id?.let {
             viewModel.deleteDiary(it).observe(this) { state ->
                 when (state) {

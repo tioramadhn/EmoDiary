@@ -10,7 +10,7 @@ object DataDummy {
                     id = i.toString(),
                     title = "Hari Ke-$i",
                     content = "Hari ini aku senang sekali karena bertemu dengan teman baru di kampus. Teman ku bernama Sinta, Jono dan Gono...",
-                    timeCreated = getDateNow(),
+                    timeCreated = getDateNow().toString().withDateFormat(),
 
                 )
                 items.add(story)

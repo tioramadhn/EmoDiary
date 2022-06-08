@@ -11,13 +11,13 @@ import java.util.*
 fun String.withDateFormat(): String {
     try {
         val format = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US)
+            SimpleDateFormat("yyyy-MM-dd", Locale.US)
         } else {
             throw IllegalArgumentException("Unparseable date")
         }
         val date = format.parse(this) as Date
 
-        return DateFormat.getDateInstance(DateFormat.LONG).format(date)
+        return DateFormat.getDateInstance(DateFormat.FULL).format(date)
     } catch (e: ParseException) {
         Log.d("Parse error", e.toString())
         e.printStackTrace()
@@ -27,16 +27,16 @@ fun String.withDateFormat(): String {
     return this
 }
 
-fun getDateNow(): String {
+fun getDateNow(): LocalDateTime? {
     val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         LocalDateTime.now()
     } else {
         throw IllegalArgumentException("Unparseable date")
     }
-
-    val formatted = "${current.dayOfWeek}, ${current.dayOfMonth} ${current.month} ${current.year}".lowercase()
-    val words = formatted.split(' ');
-    return words.joinToString(separator = " ") { word -> word.replaceFirstChar { it.uppercase() } }
+    return current
+//    val formatted = "${current.dayOfWeek}, ${current.dayOfMonth} ${current.month} ${current.year}".lowercase()
+//    val words = formatted.split(' ');
+//    return words.joinToString(separator = " ") { word -> word.replaceFirstChar { it.uppercase() } }
 }
 
 fun getIconFromEmotion(emotion: String): String {

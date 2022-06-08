@@ -66,7 +66,7 @@ class RegisterActivity : AppCompatActivity() {
                             when (it) {
                                 is State.Loading -> {
                                     progressBar.visibility = View.VISIBLE
-                                    btnDaftar.visibility = View.GONE
+                                    btnDaftar.visibility = View.INVISIBLE
                                     btnDaftarGoogle.isEnabled = false
                                 }
                                 is State.Success -> {
