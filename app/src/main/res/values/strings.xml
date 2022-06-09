@@ -94,5 +94,7 @@
     <string name="mood_kamu_sedang">Mood kamu sedang :</string>
     <string name="unknown_emo">Mood tidak diketahui</string>
     <string name="emo_unknown">🤔</string>
+    <string name="title_logout_msg">Apakah anda yakin ingin keluar ?</string>
+    <string name="desc_logout_msg">Klik lanjut untuk keluar</string>
 
 </resources>

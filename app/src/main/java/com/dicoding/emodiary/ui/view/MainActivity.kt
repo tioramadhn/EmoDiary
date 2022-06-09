@@ -2,6 +2,7 @@ package com.dicoding.emodiary.ui.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         val diaryResponse = intent.getParcelableExtra<DiaryItem>(EXTRA_DIARY)
         if (diaryResponse != null) {
+            Log.d("diaryResponse : ", diaryResponse.articles.toString())
             binding.bgOverlay.visibility = View.VISIBLE
             val adapter = ArticleListAdapter()
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED

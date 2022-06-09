@@ -19,6 +19,7 @@ import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
 import com.dicoding.emodiary.utils.State
 import com.dicoding.emodiary.utils.onAlertDialog
+import com.dicoding.emodiary.utils.withDateFormat
 
 class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
     private var isEdit = false
@@ -48,7 +49,7 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
             diary?.let {
                 binding.tvDetailTitle.text = it.title
                 binding.tvDetailContent.text = it.content
-                binding.tvDetailDate.text = getString(R.string.upload_on, it.timeCreated)
+                binding.tvDetailDate.text = getString(R.string.upload_on, it.timeCreated?.withDateFormat())
             }
         } else {
             actionBarTitle = "Tambah Diary"
