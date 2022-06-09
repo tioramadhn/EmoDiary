@@ -104,8 +104,9 @@ class LoginActivity : AppCompatActivity() {
         data.apply {
             accessToken?.let { session.setString(ACCESS_TOKEN, it) }
             refreshToken?.let { session.setString(REFRESH_TOKEN, it) }
-            photo?.let { session.setString("photo", it) }
-            fullname?.let { session.setString("fullname", it) }
+            photo?.let { session.setString(PHOTO_URL, it) }
+            fullname?.let { session.setString(FULL_NAME, it) }
+            email?.let { session.setString(EMAIL, it) }
             id?.let { session.setString(USER_ID, it) }
         }
         val intent = Intent(this, MainActivity::class.java)

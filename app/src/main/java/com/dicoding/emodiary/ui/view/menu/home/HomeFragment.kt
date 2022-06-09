@@ -2,6 +2,7 @@ package com.dicoding.emodiary.ui.view.menu.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,13 +57,23 @@ class HomeFragment : Fragment() {
         val session = SessionManager(requireActivity())
 
         //Set profile picture
-        Glide.with(binding.imgProfil.context)
-            .load(R.drawable.default_profile)
-            .circleCrop()
-            .into(binding.imgProfil)
+        val photoUrl = session.getString(PHOTO_URL)
+        Log.d("photoUrl : ", photoUrl )
+        if(photoUrl.isEmpty()){
+            Glide.with(binding.imgProfil.context)
+                .load(R.drawable.default_profile)
+                .circleCrop()
+                .into(binding.imgProfil)
+        }else{
+            Glide.with(binding.imgProfil.context)
+                .load(photoUrl)
+                .circleCrop()
+                .into(binding.imgProfil)
+        }
+
 
         //Set say halo
-        binding.tvHalo.text = getString(R.string.say_halo, session.getString("fullname"))
+        binding.tvHalo.text = getString(R.string.say_halo, session.getString(FULL_NAME))
 
         //Set Date Now
         binding.tvDateNow.text = getDateNow().toString().withDateFormat()

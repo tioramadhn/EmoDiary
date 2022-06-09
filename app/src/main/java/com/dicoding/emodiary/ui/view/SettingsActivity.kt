@@ -4,11 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivitySettingsBinding
-import com.dicoding.emodiary.utils.IS_USER_SEEN_ONBOARDING_SCREEN
-import com.dicoding.emodiary.utils.SessionManager
-import com.dicoding.emodiary.utils.onAlertDialog
+import com.dicoding.emodiary.utils.*
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
@@ -23,9 +22,34 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setupAction()
+        setupView()
+    }
+
+    private fun setupView() {
+        val session = SessionManager(this)
+        binding.tvName.text = session.getString(FULL_NAME)
+        binding.tvEmail.text = session.getString(EMAIL)
+        val photoUrl = session.getString(PHOTO_URL)
+        if(photoUrl.isEmpty()){
+            Glide.with(binding.imgProfilePicture.context)
+                .load(R.drawable.default_profile)
+                .circleCrop()
+                .into(binding.imgProfilePicture)
+        }else{
+            Glide.with(binding.imgProfilePicture.context)
+                .load(photoUrl)
+                .circleCrop()
+                .into(binding.imgProfilePicture)
+        }
     }
 
     private fun setupAction() {
+        //go to profile
+        binding.box.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+            finish()
+        }
+
         //Logout
         binding.btnLogout.setOnClickListener {
             onAlertDialog(
@@ -39,6 +63,7 @@ class SettingsActivity : AppCompatActivity() {
             }
 
         }
+
     }
 
     private fun logOut() {
