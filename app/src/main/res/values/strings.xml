@@ -96,5 +96,6 @@
     <string name="emo_unknown">🤔</string>
     <string name="title_logout_msg">Apakah anda yakin ingin keluar ?</string>
     <string name="desc_logout_msg">Klik lanjut untuk keluar</string>
+    <string name="permission">Izin tidak diberikan</string>
 
 </resources>

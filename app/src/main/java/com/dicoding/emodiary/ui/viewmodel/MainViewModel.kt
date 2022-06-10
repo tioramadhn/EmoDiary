@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
 import com.dicoding.emodiary.data.remote.body.RegisterBody
 import com.dicoding.emodiary.data.repository.Repository
+import okhttp3.MultipartBody
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
     fun login(email: String, password: String) = repository.login(email, password)
@@ -15,4 +16,5 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     fun updateDiary(id: String, diaryBody: CreateDiaryBody) = repository.updateDiary(id, diaryBody)
     fun getEmotions() = repository.getEmotions()
     fun getArticles(emotions: List<String> ) = repository.getArticles(emotions)
+    fun uploadPhoto(id: String, photo: MultipartBody.Part) = repository.uploadPhoto(id, photo)
 }
