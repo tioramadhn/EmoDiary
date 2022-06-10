@@ -93,12 +93,11 @@ class HomeFragment : Fragment() {
                     if(result.data?.isNotEmpty() == true){
                         adapter.submitList(result.data)
                         binding.rvDiary.adapter = adapter
-                    }else{
+                    }else {
                         binding.imgNoDiary.visibility = View.VISIBLE
                         binding.tvTitleNoDiary.visibility = View.VISIBLE
                         binding.tvDescNoDiary.visibility = View.VISIBLE
                     }
-
                 }
                 is State.Error -> {
                     binding.progressBar.visibility = View.INVISIBLE
@@ -108,14 +107,8 @@ class HomeFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
-
-
-
             }
         }
-
-
-
     }
 
     private fun getEmotions() {
@@ -141,7 +134,6 @@ class HomeFragment : Fragment() {
                     binding.imgMood.text = myEmotion(requireActivity(), "unknown").second
                 }
             }
-
         }
     }
 

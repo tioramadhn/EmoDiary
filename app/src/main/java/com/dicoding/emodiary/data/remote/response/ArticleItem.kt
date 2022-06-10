@@ -68,5 +68,5 @@ data class DetectedExtensions(
     val suara: Int? = null,
 
     @field:SerializedName("skor")
-    val skor: Int? = null
+    val skor: Float? = null
 ) : Parcelable

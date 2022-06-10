@@ -61,6 +61,6 @@ interface ApiService {
 
     @GET("/articles")
     suspend fun getArticles(
-        @Query("emotions") emotions: List<String>
-    ): BaseResponse<ArticleItem?>
+        @Query("emotions[]") emotions: List<String>
+    ): BaseResponse<List<ArticleItem?>>
 }

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.adapter.ArticleListAdapter
 import com.dicoding.emodiary.databinding.FragmentArticleBinding
@@ -30,7 +31,7 @@ class ArticleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         val root: View = binding.root
         setupView()
@@ -49,6 +50,11 @@ class ArticleFragment : Fragment() {
             getString(R.string.love),
             getString(R.string.surprise)
         )
+
+        val adapter = ArticleListAdapter()
+        binding.rvArticle.layoutManager = LinearLayoutManager(requireActivity())
+        binding.rvArticle.adapter = adapter
+
         viewModel.getArticles(emotions).observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> {
@@ -56,20 +62,21 @@ class ArticleFragment : Fragment() {
                 }
                 is State.Success -> {
                     binding.progressBar.visibility = View.GONE
+                    val result = it.data
+                    if (result.data?.isNotEmpty() == true){
+                        adapter.submitList(result.data)
+                    }
                     Log.d("response_article", it.data.toString())
                     Toast.makeText(requireActivity(), "Artikel succes di load", Toast.LENGTH_LONG)
                         .show()
                 }
                 is State.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Log.d("response_article", it.error.toString())
+                    Log.d("response_article", it.error)
                     Toast.makeText(requireActivity(), it.error, Toast.LENGTH_LONG)
                         .show()
                 }
             }
         }
-
-        val adapter = ArticleListAdapter()
     }
-
 }

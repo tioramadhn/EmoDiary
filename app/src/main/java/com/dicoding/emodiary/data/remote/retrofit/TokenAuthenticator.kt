@@ -62,7 +62,6 @@ class TokenAuthenticator(context: Context) : Authenticator {
 
                 val response = retrofit.refreshAccessToken(refreshTokenBody)
                 State.Success(response)
-
             } catch (throwable: Throwable) {
                 val message = throwable.message.toString()
 
