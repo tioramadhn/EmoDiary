@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,14 +66,12 @@ class ArticleFragment : Fragment() {
                         adapter.submitList(result.data)
                     }
                     Log.d("response_article", it.data.toString())
-                    Toast.makeText(requireActivity(), "Artikel succes di load", Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(requireActivity(), "Artikel succes di load", Toast.LENGTH_LONG).show()
                 }
                 is State.Error -> {
                     binding.progressBar.visibility = View.GONE
                     Log.d("response_article", it.error)
-                    Toast.makeText(requireActivity(), it.error, Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(requireActivity(), it.error, Toast.LENGTH_LONG).show()
                 }
             }
         }

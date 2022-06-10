@@ -2,13 +2,20 @@ package com.dicoding.emodiary.data.repository
 
 import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
 import com.dicoding.emodiary.data.remote.body.RegisterBody
+import com.dicoding.emodiary.data.remote.body.UpdateProfileBody
 import com.dicoding.emodiary.data.remote.retrofit.ApiService
 import okhttp3.MultipartBody
+import retrofit2.http.Field
+import retrofit2.http.Url
 
 class Repository(private val apiService: ApiService) : BaseRepository() {
 
     fun login(email: String, password: String) = safeApiCall {
         apiService.login(email, password)
+    }
+
+    fun loginWithGoogle(credential: String) = safeApiCall {
+        apiService.loginWithGoogle(credential)
     }
 
     fun register(registerBody: RegisterBody) = safeApiCall {
@@ -45,6 +52,10 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
 
     fun uploadPhoto(id: String, photo: MultipartBody.Part) = safeApiCall {
         apiService.uploadPhoto(id, photo)
+    }
+
+    fun updateProfile(id: String, userProfileBody: UpdateProfileBody) = safeApiCall {
+        apiService.updateProfile(id, userProfileBody)
     }
 
     companion object {
