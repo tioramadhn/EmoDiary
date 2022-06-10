@@ -13,6 +13,7 @@ import com.dicoding.emodiary.utils.ACCESS_TOKEN
 import com.dicoding.emodiary.utils.DELAY
 import com.dicoding.emodiary.utils.IS_USER_SEEN_ONBOARDING_SCREEN
 import com.dicoding.emodiary.utils.SessionManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,15 +23,16 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val session = SessionManager(this)
-            if(session.getBoolean(IS_USER_SEEN_ONBOARDING_SCREEN ) && session.getString(ACCESS_TOKEN).isNotEmpty()){
+            val googleAccount = GoogleSignIn.getLastSignedInAccount(this)
+            if (googleAccount != null || session.getBoolean(IS_USER_SEEN_ONBOARDING_SCREEN ) && session.getString(ACCESS_TOKEN).isNotEmpty()){
                 val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-            }else if(session.getBoolean(IS_USER_SEEN_ONBOARDING_SCREEN ) && session.getString(ACCESS_TOKEN).isEmpty()){
+            } else if (session.getBoolean(IS_USER_SEEN_ONBOARDING_SCREEN ) && session.getString(ACCESS_TOKEN).isEmpty()){
                 val intent = Intent(this@SplashScreenActivity, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
-            }else{
+            } else {
                 val intent = Intent(this@SplashScreenActivity, OnBoardingActivity::class.java)
                 startActivity(intent)
                 finish()

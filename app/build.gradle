@@ -17,6 +17,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SERVER_CLIENT_ID", '"594020275326-qf1760bii4ujt7e974ihgdkl629p4gpm.apps.googleusercontent.com"')
     }
 
     buildTypes {
@@ -43,7 +45,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+
+    // google auth services
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
     // testing
     testImplementation 'junit:junit:4.13.2'
@@ -65,8 +70,8 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
 
     //Navigation Component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'

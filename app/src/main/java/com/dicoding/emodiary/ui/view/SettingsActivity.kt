@@ -5,12 +5,18 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.dicoding.emodiary.BuildConfig
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivitySettingsBinding
 import com.dicoding.emodiary.utils.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var gsc: GoogleSignInClient
 
     //    private lateinit var binding: UnderDevelopmentBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +26,11 @@ class SettingsActivity : AppCompatActivity() {
 
         supportActionBar?.title = getString(R.string.settings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(BuildConfig.SERVER_CLIENT_ID)
+            .requestEmail()
+            .build()
+        gsc = GoogleSignIn.getClient(this, gso)
 
         setupAction()
         setupView()
@@ -67,11 +78,15 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun logOut() {
-        val sessionManager = SessionManager(this)
-        sessionManager.clearSession()
-        sessionManager.setBoolean(IS_USER_SEEN_ONBOARDING_SCREEN, true)
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
+        gsc.signOut().addOnCompleteListener {
+            val sessionManager = SessionManager(this)
+            sessionManager.clearSession()
+            sessionManager.setBoolean(IS_USER_SEEN_ONBOARDING_SCREEN, true)
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -1,5 +1,6 @@
 package com.dicoding.emodiary.ui.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,15 +11,23 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.dicoding.emodiary.BuildConfig
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.data.remote.response.LoginResponse
 import com.dicoding.emodiary.databinding.ActivityLoginBinding
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
 import com.dicoding.emodiary.utils.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var gsc: GoogleSignInClient
     private val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
@@ -30,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
         setupView()
         setupAction()
+        initGoogleAuthServices()
     }
 
     private fun setupAction() {
@@ -109,6 +119,10 @@ class LoginActivity : AppCompatActivity() {
             email?.let { session.setString(EMAIL, it) }
             id?.let { session.setString(USER_ID, it) }
         }
+        moveToMainActivity()
+    }
+
+    private fun moveToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
@@ -127,5 +141,51 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    @Suppress("DEPRECATION")
+    private fun initGoogleAuthServices() {
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(BuildConfig.SERVER_CLIENT_ID)
+            .requestEmail()
+            .build()
+        gsc = GoogleSignIn.getClient(this, gso)
 
+        binding.btnMasukGoogle.setOnClickListener {
+            val signInIntent = gsc.signInIntent
+            startActivityForResult(signInIntent, 1000)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1000) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val result = task.getResult(ApiException::class.java)
+                if (result != null) swapToken(result.idToken.toString())
+            } catch (e: ApiException) {
+                Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun swapToken(accessToken: String) {
+        viewModel.loginWithGoogle(accessToken).observe(this) {
+            when(it) {
+                is State.Loading -> {
+                    // TODO: fill the ui logic
+                    Log.d("pantau dari backend", "loading...")
+                }
+                is State.Success -> {
+                    login(it.data)
+                    Log.d("pantau dari backend", it.data.accessToken.toString())
+                }
+                is State.Error -> {
+                    // TODO: fill the ui logic
+                    Log.d("pantau dari backend", it.error)
+                }
+            }
+        }
+    }
 }
