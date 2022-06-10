@@ -50,8 +50,8 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
         apiService.getArticles(emotions)
     }
 
-    fun uploadPhoto(id: String, photo: MultipartBody.Part) = safeApiCall {
-        apiService.uploadPhoto(id, photo)
+    fun uploadPhoto(id: String, File: MultipartBody.Part) = safeApiCall {
+        apiService.uploadPhoto(id, File)
     }
 
     fun updateProfile(id: String, userProfileBody: UpdateProfileBody) = safeApiCall {

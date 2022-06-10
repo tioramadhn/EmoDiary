@@ -6,6 +6,7 @@ import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -120,6 +121,7 @@ class ProfileActivity : AppCompatActivity() {
                 is State.Error -> {
                     binding.imgProfile.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
+                    Log.d("pantau", it.error)
                     Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
                 }
             }
