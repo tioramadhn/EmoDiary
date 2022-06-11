@@ -2,6 +2,7 @@ package com.dicoding.emodiary.ui.view
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.emodiary.BuildConfig
@@ -151,38 +153,49 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnMasukGoogle.setOnClickListener {
             val signInIntent = gsc.signInIntent
-            startActivityForResult(signInIntent, 1000)
+            launcherIntentGoogleSignIn.launch(signInIntent)
         }
     }
 
-    @Suppress("DEPRECATION")
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 1000) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+    private val launcherIntentGoogleSignIn = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        Log.d("pantau", "${result.resultCode} == ${RESULT_OK}, data = ${result.data?.data}")
+        if (result.resultCode == RESULT_OK) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
-                val result = task.getResult(ApiException::class.java)
-                if (result != null) swapToken(result.idToken.toString())
+                val response = task.getResult(ApiException::class.java)
+                Log.d("pantau", "$result")
+
+                if (response != null) {
+                    swapToken(response.idToken.toString())
+                }
             } catch (e: ApiException) {
-                Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
+
+
     private fun swapToken(accessToken: String) {
         viewModel.loginWithGoogle(accessToken).observe(this) {
-            when(it) {
+            when (it) {
                 is State.Loading -> {
-                    // TODO: fill the ui logic
+                    binding.progressBarGoogle.visibility = View.VISIBLE
+                    binding.btnMasukGoogle.visibility = View.INVISIBLE
                     Log.d("pantau dari backend", "loading...")
                 }
                 is State.Success -> {
+                    binding.progressBarGoogle.visibility = View.INVISIBLE
+                    binding.btnMasukGoogle.visibility = View.VISIBLE
                     login(it.data)
                     Log.d("pantau dari backend", it.data.accessToken.toString())
                 }
                 is State.Error -> {
-                    // TODO: fill the ui logic
+                    binding.progressBarGoogle.visibility = View.INVISIBLE
+                    binding.btnMasukGoogle.visibility = View.VISIBLE
                     Log.d("pantau dari backend", it.error)
                 }
             }

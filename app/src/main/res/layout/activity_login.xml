@@ -85,6 +85,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:textColor="@color/white"
         android:text="@string/masuk"
         app:backgroundTint="@null"
         android:background="@drawable/shape_rectangle_contained_blue"
@@ -132,7 +133,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:textColor="#404040"
+        android:textColor="?attr/colorPrimary"
         app:backgroundTint="@null"
         app:icon="@drawable/ic_google"
         app:iconTint="@null"
@@ -177,6 +178,17 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_masuk"
         app:layout_constraintStart_toStartOf="@+id/btn_masuk"
         app:layout_constraintTop_toTopOf="@+id/btn_masuk" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/btn_masuk_google"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_masuk_google"
+        app:layout_constraintStart_toStartOf="@+id/btn_masuk_google"
+        app:layout_constraintTop_toTopOf="@+id/btn_masuk_google" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

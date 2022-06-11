@@ -68,7 +68,8 @@
                 android:src="@drawable/ic_baseline_palette_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorPrimary" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,6 +82,7 @@
                 app:layout_constraintTop_toTopOf="@+id/ic_theme" />
 
             <ImageView
+                app:tint="?attr/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_arrow_forward_ios_24"
@@ -101,6 +103,7 @@
             android:paddingVertical="16dp">
 
             <ImageView
+                app:tint="?attr/colorPrimary"
                 android:id="@+id/ic_languange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,6 +123,7 @@
                 app:layout_constraintTop_toTopOf="@+id/ic_languange" />
 
             <ImageView
+                app:tint="?attr/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_arrow_forward_ios_24"
@@ -139,6 +143,7 @@
             android:paddingVertical="16dp">
 
             <ImageView
+                app:tint="?attr/colorPrimary"
                 android:id="@+id/ic_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,6 +163,7 @@
                 app:layout_constraintTop_toTopOf="@+id/ic_logout" />
 
             <ImageView
+                app:tint="?attr/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_arrow_forward_ios_24"
