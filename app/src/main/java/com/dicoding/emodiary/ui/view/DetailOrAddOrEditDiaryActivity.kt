@@ -25,12 +25,6 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
     private var isEdit = false
     private var diary: DiaryItem? = null
     private var isAdd = false
-
-    companion object {
-        const val EXTRA_DIARY = "extra_diary"
-        const val FLAG_ADD = "extra_add_diary"
-    }
-
     private val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
@@ -45,15 +39,15 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
         diary = intent.getParcelableExtra(EXTRA_DIARY)
         isAdd = intent.getBooleanExtra(FLAG_ADD, false)
         if (diary != null) {
-            actionBarTitle = "My Diary"
+            actionBarTitle = getString(R.string.my_diary)
             diary?.let {
                 binding.tvDetailTitle.text = it.title
                 binding.tvDetailContent.text = it.content
                 binding.tvDetailDate.text = getString(R.string.upload_on, it.timeCreated?.withDateFormat())
             }
         } else {
-            actionBarTitle = "Tambah Diary"
-            showAddOrEditView("Tambah Diary")
+            actionBarTitle = getString(R.string.add_diary_title)
+            showAddOrEditView(getString(R.string.add_diary_btn))
         }
 
         supportActionBar?.title = actionBarTitle
@@ -64,7 +58,7 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.fab.setOnClickListener {
             isEdit = true
-            showAddOrEditView("Ubah Diary")
+            showAddOrEditView(getString(R.string.update_diary))
             diary?.let {
                 binding.titleEditText.setText(it.title)
                 binding.contentEditText.setText(it.content)
@@ -72,14 +66,12 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
         }
 
         binding.titleEditText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus || binding.titleEditText.text?.isNotEmpty() == true) binding.titleEditTextLayout.hint =
-                null
+            if (hasFocus || binding.titleEditText.text?.isNotEmpty() == true) binding.titleEditTextLayout.hint = null
             else binding.titleEditText.hint = getString(R.string.judul_hint)
         }
 
         binding.contentEditText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus || binding.contentEditText.text?.isNotEmpty() == true) binding.contentEditTextLayout.hint =
-                null
+            if (hasFocus || binding.contentEditText.text?.isNotEmpty() == true) binding.contentEditTextLayout.hint = null
             else binding.contentEditText.hint = getString(R.string.content_hint)
         }
 
@@ -88,32 +80,24 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
 
             val title = binding.titleEditText.text.toString()
             val content = binding.contentEditText.text.toString()
-            if(title.isNotEmpty() && content.isNotEmpty()){
+            if (title.isNotEmpty() && content.isNotEmpty()) {
                 binding.progressBar.visibility = View.VISIBLE
                 binding.btnSubmit.visibility = View.INVISIBLE
             }
             val diaryBody = CreateDiaryBody(title, content)
             when {
-                title.isEmpty() -> binding.titleEditTextLayout.error =
-                    getString(R.string.title_is_empty)
-                content.isEmpty() -> binding.contentEditTextLayout.error =
-                    getString(R.string.content_is_empty)
+                title.isEmpty() -> binding.titleEditTextLayout.error = getString(R.string.title_is_empty)
+                content.isEmpty() -> binding.contentEditTextLayout.error = getString(R.string.content_is_empty)
                 else -> {
-                    if (isAdd) {
-                        createDiary(title, content)
-                    } else if (isEdit) {
-                        updateDiary(diary?.id, diaryBody)
-                    }
+                    if (isAdd) createDiary(title, content)
+                    else if (isEdit) updateDiary(diary?.id, diaryBody)
                 }
             }
-
-
         }
     }
 
-   private fun View.hideKeyboard() {
-        val inputManager =
-            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    private fun View.hideKeyboard() {
+        val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
@@ -202,9 +186,7 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
             tvDetailContent.visibility = View.INVISIBLE
         }
 
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         return if (isAdd) {
@@ -223,8 +205,8 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                 this,
                 getString(R.string.title_edit_dialog),
                 getString(R.string.title_contentEdit_dialog),
-                getString(R.string.back),
-                getString(R.string.next)
+                getString(R.string.cancel),
+                getString(R.string.yes)
             ) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
@@ -237,12 +219,11 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                     this,
                     getString(R.string.title_delete_dialog),
                     getString(R.string.content_delete_dialog),
-                    getString(R.string.back),
-                    getString(R.string.next)
+                    getString(R.string.cancel),
+                    getString(R.string.yes)
                 ) {
                     deleteDiary()
                 }
-
                 return true
             }
         }
@@ -276,12 +257,9 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-
             }
         }
-
     }
-
 
     override fun onBackPressed() {
         if (isEdit) {
@@ -298,5 +276,10 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
         } else {
             finish()
         }
+    }
+
+    companion object {
+        const val EXTRA_DIARY = "EXTRA_DIARY"
+        const val FLAG_ADD = "FLAG_ADD"
     }
 }

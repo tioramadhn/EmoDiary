@@ -18,26 +18,16 @@ import com.dicoding.emodiary.utils.State
 
 class ArticleFragment : Fragment() {
     private var _binding: FragmentArticleBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-
     private val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(requireActivity())
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentArticleBinding.inflate(inflater, container, false)
         val root: View = binding.root
         setupView()
         return root
-//        _binding = UnderDevelopmentBinding.inflate(inflater, container, false)
-//        val root: View = binding.root
-//        return root
     }
 
     private fun setupView() {
@@ -51,8 +41,10 @@ class ArticleFragment : Fragment() {
         )
 
         val adapter = ArticleListAdapter()
-        binding.rvArticle.layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvArticle.adapter = adapter
+        binding.apply {
+            rvArticle.layoutManager = LinearLayoutManager(requireActivity())
+            rvArticle.adapter = adapter
+        }
 
         viewModel.getArticles(emotions).observe(viewLifecycleOwner) {
             when (it) {
@@ -62,16 +54,12 @@ class ArticleFragment : Fragment() {
                 is State.Success -> {
                     binding.progressBar.visibility = View.GONE
                     val result = it.data
-                    if (result.data?.isNotEmpty() == true){
-                        adapter.submitList(result.data)
-                    }
-                    Log.d("response_article", it.data.toString())
-                    Toast.makeText(requireActivity(), "Artikel succes di load", Toast.LENGTH_LONG).show()
+                    if (result.data?.isNotEmpty() == true) adapter.submitList(result.data)
                 }
                 is State.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Log.d("response_article", it.error)
-                    Toast.makeText(requireActivity(), it.error, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireActivity(), it.error, Toast.LENGTH_SHORT).show()
+                    Log.d("ArticleFragment", it.error)
                 }
             }
         }

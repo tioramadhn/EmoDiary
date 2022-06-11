@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dicoding.emodiary">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@drawable/emo_happy"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Emodiary">
+        android:theme="@style/Theme.Emodiary"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <activity
             android:name=".ui.view.ProfileActivity"
             android:exported="false" />
@@ -27,17 +30,20 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.DetailOrAddOrEditDiaryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.view.MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_home" />
+            android:label="@string/title_activity_home"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.view.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.view.OnBoardingActivity"
             android:exported="false" />
@@ -50,6 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.dicoding.emodiary"
@@ -57,7 +64,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 

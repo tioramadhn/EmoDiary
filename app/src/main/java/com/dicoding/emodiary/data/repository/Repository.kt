@@ -1,5 +1,6 @@
 package com.dicoding.emodiary.data.repository
 
+import android.util.Log
 import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
 import com.dicoding.emodiary.data.remote.body.RegisterBody
 import com.dicoding.emodiary.data.remote.body.UpdateProfileBody
@@ -50,8 +51,8 @@ class Repository(private val apiService: ApiService) : BaseRepository() {
         apiService.getArticles(emotions)
     }
 
-    fun uploadPhoto(id: String, File: MultipartBody.Part) = safeApiCall {
-        apiService.uploadPhoto(id, File)
+    fun uploadPhoto(id: String, file: MultipartBody.Part) = safeApiCall {
+        apiService.uploadPhoto(id, file)
     }
 
     fun updateProfile(id: String, userProfileBody: UpdateProfileBody) = safeApiCall {

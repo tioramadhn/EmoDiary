@@ -1,8 +1,6 @@
 package com.dicoding.emodiary.ui.view
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -25,7 +23,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 
-
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var gso: GoogleSignInOptions
@@ -38,10 +35,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupView()
         setupAction()
-        initGoogleAuthServices()
+        setupGoogleAuthServices()
     }
 
     private fun setupAction() {
@@ -57,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
                 val validEmail = isEmailValid(this@LoginActivity, email)
                 val validPassword = isPasswordValid(this@LoginActivity, password)
 
-
                 when {
                     !validEmail.second -> {
                         emailEditTextLayout.error = validEmail.first
@@ -65,7 +60,6 @@ class LoginActivity : AppCompatActivity() {
                     !validPassword.second -> {
                         passwordEditTextLayout.error = validPassword.first
                     }
-
                     else -> {
                         viewModel.login(email, password).observe(this@LoginActivity) {
                             when (it) {
@@ -79,29 +73,15 @@ class LoginActivity : AppCompatActivity() {
                                     btnMasuk.visibility = View.VISIBLE
                                     btnMasukGoogle.isEnabled = true
                                     val data = it.data
-                                    Toast.makeText(
-                                        this@LoginActivity,
-                                        getString(R.string.login_success_msg),
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    Log.d("Response LOGIN SUKSES", data.toString())
-
                                     login(data)
                                 }
                                 is State.Error -> {
                                     progressBar.visibility = View.GONE
                                     btnMasuk.visibility = View.VISIBLE
                                     btnMasukGoogle.isEnabled = true
-                                    Toast.makeText(
-                                        this@LoginActivity,
-                                        it.error,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-
-                                    Log.d("Response LOGIN ERR", it.error)
+                                    Toast.makeText(this@LoginActivity, it.error, Toast.LENGTH_SHORT).show()
+                                    Log.d("LoginActivity", it.error)
                                 }
-
-                                else -> {}
                             }
                         }
                     }
@@ -144,7 +124,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     @Suppress("DEPRECATION")
-    private fun initGoogleAuthServices() {
+    private fun setupGoogleAuthServices() {
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(BuildConfig.SERVER_CLIENT_ID)
             .requestEmail()
@@ -157,46 +137,39 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private val launcherIntentGoogleSignIn = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        Log.d("pantau", "${result.resultCode} == ${RESULT_OK}, data = ${result.data?.data}")
+    private val launcherIntentGoogleSignIn = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
                 val response = task.getResult(ApiException::class.java)
-                Log.d("pantau", "$result")
-
-                if (response != null) {
-                    swapToken(response.idToken.toString())
-                }
+                if (response != null) swapToken(response.idToken.toString())
             } catch (e: ApiException) {
-                Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(applicationContext, getString(R.string.unknown_error), Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-
 
     private fun swapToken(accessToken: String) {
         viewModel.loginWithGoogle(accessToken).observe(this) {
             when (it) {
                 is State.Loading -> {
-                    binding.progressBarGoogle.visibility = View.VISIBLE
-                    binding.btnMasukGoogle.visibility = View.INVISIBLE
-                    Log.d("pantau dari backend", "loading...")
+                    binding.apply {
+                        progressBarGoogle.visibility = View.VISIBLE
+                        btnMasukGoogle.visibility = View.INVISIBLE
+                    }
                 }
                 is State.Success -> {
-                    binding.progressBarGoogle.visibility = View.INVISIBLE
-                    binding.btnMasukGoogle.visibility = View.VISIBLE
+                    binding.apply {
+                        progressBarGoogle.visibility = View.INVISIBLE
+                        btnMasukGoogle.visibility = View.VISIBLE
+                    }
                     login(it.data)
-                    Log.d("pantau dari backend", it.data.accessToken.toString())
                 }
                 is State.Error -> {
-                    binding.progressBarGoogle.visibility = View.INVISIBLE
-                    binding.btnMasukGoogle.visibility = View.VISIBLE
-                    Log.d("pantau dari backend", it.error)
+                    binding.apply {
+                        progressBarGoogle.visibility = View.INVISIBLE
+                        btnMasukGoogle.visibility = View.VISIBLE
+                    }
                 }
             }
         }

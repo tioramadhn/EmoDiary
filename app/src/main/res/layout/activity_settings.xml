@@ -23,42 +23,43 @@
             android:layout_height="80dp"
             android:src="@drawable/default_profile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription,ImageContrastCheck" />
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Tio Ramadhan"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tv_email"
             app:layout_constraintStart_toEndOf="@+id/img_profile_picture"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="name" />
 
         <TextView
             android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tioramadhan9f@gmail.com"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="example@mail.com" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/box"
         android:layout_marginHorizontal="24dp"
-        android:orientation="vertical">
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/box">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_theme"
             android:paddingVertical="16dp">
 
             <ImageView
@@ -69,113 +70,126 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="?attr/colorPrimary" />
+                app:tint="?attr/colorPrimary"
+                tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/tv_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Tema"
+                android:text="@string/theme_setting"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ic_theme"
                 app:layout_constraintStart_toEndOf="@id/ic_theme"
                 app:layout_constraintTop_toTopOf="@+id/ic_theme" />
 
-            <ImageView
-                app:tint="?attr/colorPrimary"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="horizontal"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_theme"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/tv_theme">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/light"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/dark_mode_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="?attr/colorPrimary"
+                    android:trackTint="?attr/colorPrimary"
+                    tools:ignore="TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml"
+                    tools:targetApi="m" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dark"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
+            style="@style/Divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            style="@style/Divider" />
+            android:layout_height="1dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_languange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_languange"
             android:paddingVertical="16dp">
 
             <ImageView
-                app:tint="?attr/colorPrimary"
                 android:id="@+id/ic_languange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_language_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorPrimary"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Bahasa"
+                android:text="@string/language_setting"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ic_languange"
                 app:layout_constraintStart_toEndOf="@id/ic_languange"
                 app:layout_constraintTop_toTopOf="@+id/ic_languange" />
 
-            <ImageView
-                app:tint="?attr/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
+            style="@style/Divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            style="@style/Divider" />
+            android:layout_height="1dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_logout"
             android:paddingVertical="16dp">
 
             <ImageView
-                app:tint="?attr/colorPrimary"
                 android:id="@+id/ic_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_logout_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorPrimary"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Keluar"
+                android:text="@string/logout_btn"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ic_logout"
                 app:layout_constraintStart_toEndOf="@id/ic_logout"
                 app:layout_constraintTop_toTopOf="@+id/ic_logout" />
 
-            <ImageView
-                app:tint="?attr/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
+            style="@style/Divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            style="@style/Divider" />
+            android:layout_height="1dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

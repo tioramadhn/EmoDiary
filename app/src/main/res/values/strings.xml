@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">emodiary</string>
 
-    <!-- Network error message -->
+    <!-- error message -->
     <string name="network_error">Network error</string>
+    <string name="unknown_error">Something went wrong. Please check your internet connection.</string>
 
     <!-- Form validation error message -->
+    <string name="name_is_empty">Name is required</string>
     <string name="email_required_error">Email is required</string>
     <string name="email_invalid_error">Invalid email format</string>
     <string name="password_required_error">Password is required</string>
@@ -13,8 +15,9 @@
     <string name="password_upper_case_error">Password must contain one upper case letter</string>
     <string name="password_lower_case_error">Password must contain one lower case letter</string>
     <string name="password_number_error">Password must contain one digit number</string>
-    <string name="emo_diary">Emo-Diary</string>
-    <string name="emodiary_sub">Teman curhat yang hanya mengerti kamuu</string>
+
+    <string name="emo_diary">EmoDiary</string>
+    <string name="emodiary_sub">Your virtual emotional support system</string>
     <string name="title_menu_1">Virtual Emotional Support System</string>
     <string name="desc_menu_1">Ceritakan apapun yang kamu rasakan</string>
     <string name="mulai">Mulai</string>
@@ -22,58 +25,74 @@
     <string name="desc_menu_2">Kami akan mendengar cerita mu hari ini</string>
     <string name="title_menu_3">Santai kayak dipantai</string>
     <string name="desc_menu_3">Pikiran tenang dan nyaman bersama kami</string>
-    <string name="masuk">Masuk</string>
-    <string name="login_desc">Selamat datang kembali, silahkan masuk dengan\nakun yang sudah terdaftar</string>
+    <string name="masuk">Login</string>
+    <string name="login_desc">Welcome back, please login with registered account</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="or">atau</string>
-    <string name="masuk_dengan_google">Masuk dengan Google</string>
-    <string name="daftar">Daftar</string>
-    <string name="regist_desc">Gabung bersama Emo-Diary dan ungkapkan perasaan kamu</string>
-    <string name="full_name">Full Name</string>
-    <string name="daftar_dengan_google">Daftar dengan Google</string>
-    <string name="sudah_punya_akun">Sudah punya akun?</string>
-    <string name="masuk_sekarang">Masuk sekarang</string>
-    <string name="belum_punya_akun_ayo">Belum punya akun? Ayo</string>
+    <string name="or">or</string>
+    <string name="masuk_dengan_google">Login with Google</string>
+    <string name="daftar">Register</string>
+    <string name="regist_desc">Join with EmoDiary and start to share your feelings</string>
+    <string name="full_name">Full name</string>
+    <string name="sudah_punya_akun">Already have an account?</string>
+    <string name="masuk_sekarang">Login</string>
+    <string name="belum_punya_akun_ayo">Don\'t have an account yet?</string>
     <string name="login_success_msg">Login Success</string>
-    <string name="name_is_empty">Name cannot empty</string>
     <string name="regist_success_msg">Register Success</string>
     <string name="foto_profil">Foto profil</string>
     <string name="date_diary">Kamis, 2 Juni 2022</string>
     <string name="diary_desc">Hari ini aku senang sekali karena bertemu dengan teman baru di kampus. Teman ku bernama Sinta, Jono dan Gono...</string>
     <string name="diary_title">Bertemu dengan teman baru</string>
-    <string name="mood_kamu_hari_ini">Mood kamu hari ini</string>
+    <string name="mood_kamu_hari_ini">How you feel today?</string>
     <string name="mood">Senang</string>
-    <string name="say_halo">Halo, %1s</string>
+    <string name="say_halo">Hello 👋, %1s</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="judul_diary">Judul Diary</string>
-    <string name="judul_hint">Masukkan judul diary disini...</string>
-    <string name="content_hint">Ceritakan disini..</string>
-    <string name="title_edit_dialog">Apakah anda ingin membatalkan perubahan pada form?</string>
-    <string name="title_contentEdit_dialog">Klik lanjut untuk membatalkan perubahan</string>
-    <string name="regist_success_msg_desc">Silahkan login terlebih dahulu</string>
+    <string name="judul_diary">Diary Title</string>
+    <string name="judul_hint">Enter diary title here</string>
+    <string name="content_hint">tell me what you\'re feelings</string>
+    <string name="title_edit_dialog">Are you sure you want to cancel this changes?</string>
+    <string name="title_contentEdit_dialog">Click yes to continue</string>
+    <string name="regist_success_msg_desc">Please login to continue</string>
+
     <string name="back">back</string>
     <string name="next">next</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="loading">Loading…</string>
+    <string name="article_banner">Good articles that keep you stay motivated</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_profile">Profile</string>
     <string name="title_search">Search</string>
     <string name="title_article">Article</string>
     <string name="settings">Settings</string>
-    <string name="upload_on">Dibuat pada %1s</string>
+    <string name="upload_on">Created at %1s</string>
     <string name="menu_delete">Delete</string>
-    <string name="tambah_diary">Tambah Diary</string>
     <string name="delete_success_msg">Diary berhasil dihapus</string>
     <string name="delete_failed_msg">Diary gagal dihapus</string>
     <string name="desc_no_diary">Biarkan EmoDiary membantu dalam menyelesaikan \nmasalah terkait perasaanmu</string>
     <string name="title_no_diary">Belom ada Diary nich..</string>
     <string name="get_diary_fail">Diary gagal didapatkan</string>
-    <string name="title_is_empty">Judul tidak boleh kosong</string>
-    <string name="content_is_empty">Isi diary tidak boleh kosong</string>
-    <string name="content_diary">Isi diary</string>
+    <string name="title_is_empty">Diary title is required</string>
+    <string name="content_is_empty">Diary content is required</string>
+    <string name="content_diary">Diary Content</string>
+
+    <string name="update_diary">Save Changes</string>
+    <string name="add_diary_title">Create New Diary</string>
+    <string name="add_diary_btn">Save</string>
+    <string name="my_diary">My Diary</string>
+
+    <string name="theme_setting">Theme</string>
+    <string name="language_setting">Language</string>
+    <string name="logout_btn">Logout</string>
+
     <!--  Emotions  -->
     <string name="sadness">Sadness</string>
     <string name="joy">Joy</string>
@@ -89,12 +108,16 @@
     <string name="emo_love">🥰</string>
     <string name="emo_surprise">😯</string>
 
-    <string name="title_delete_dialog">Apakah anda yakin ingin menghapus ?</string>
-    <string name="content_delete_dialog">Klik lanjut untuk menghapus diary</string>
+    <string name="title_delete_dialog">Are you sure you want to delete this diary?</string>
+    <string name="content_delete_dialog">Click yes to continue</string>
     <string name="mood_kamu_sedang">Mood kamu sedang :</string>
     <string name="unknown_emo">Mood tidak diketahui</string>
     <string name="emo_unknown">🤔</string>
-    <string name="title_logout_msg">Apakah anda yakin ingin keluar ?</string>
-    <string name="desc_logout_msg">Klik lanjut untuk keluar</string>
+    <string name="title_logout_msg">Are you sure you want to logout?</string>
+    <string name="desc_logout_msg">Click yes to continue</string>
     <string name="permission">Izin tidak diberikan</string>
+
+    <!-- Content Description -->
+    <string name="cd_splashscreen">Splash screen illustration</string>
+    <string name="cd_onboarding">Onboarding illustration</string>
 </resources>

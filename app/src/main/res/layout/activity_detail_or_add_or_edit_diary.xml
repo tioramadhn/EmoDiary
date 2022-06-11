@@ -11,9 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/judul_diary"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,9 +33,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEditText"
-            android:hint="@string/judul_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/judul_hint"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -47,7 +47,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="@string/content_diary"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEditTextLayout" />
@@ -60,8 +60,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:visibility="invisible"
         android:hint="@null"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_content_diary">
@@ -70,14 +70,15 @@
             android:id="@+id/contentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/content_hint"
             android:ems="10"
             android:gravity="left|top"
+            android:hint="@string/content_hint"
             android:inputType="textMultiLine"
             android:lines="8"
-            android:maxLines="10"
-            android:minLines="6"
-            android:scrollbars="vertical" />
+            android:maxLines="12"
+            android:minLines="8"
+            android:scrollbars="vertical"
+            tools:ignore="RtlHardcoded" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,17 +87,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/shape_rectangle_contained_blue"
-        android:text="@string/tambah_diary"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contentEditTextLayout" />
+        tools:text="Add Diary" />
 
     <!--    DETAIL VIEW -->
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -112,11 +114,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="32dp"
-        android:text="Judul Diary"
+        android:layout_marginTop="24dp"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
 
     <TextView
         android:id="@+id/tv_detail_date"
@@ -139,23 +141,25 @@
     <TextView
         android:id="@+id/tv_detail_content"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="24dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Ini adalah isi konten diary"
-        android:textSize="16dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tv_detail_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_date" />
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_date"
+        tools:text="Content" />
 
     <ProgressBar
-        android:clickable="true"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:elevation="2dp"
+        android:focusable="true"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/btn_submit"
         app:layout_constraintEnd_toEndOf="@id/btn_submit"
         app:layout_constraintStart_toStartOf="@id/btn_submit"
         app:layout_constraintTop_toTopOf="@id/btn_submit" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

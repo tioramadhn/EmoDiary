@@ -19,7 +19,6 @@ import com.dicoding.emodiary.utils.State
 import com.dicoding.emodiary.utils.isEmailValid
 import com.dicoding.emodiary.utils.isPasswordValid
 import com.dicoding.emodiary.utils.onAlertDialog
-import java.time.temporal.TemporalAdjusters.next
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -31,9 +30,21 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupView()
         setupAction()
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 
     private fun setupAction() {
@@ -46,7 +57,6 @@ class RegisterActivity : AppCompatActivity() {
                 val name = nameEditText.text.toString()
                 val email = emailEditText.text.toString()
                 val password = passwordEditText.text.toString()
-                Log.d("Req BODY", "name: $name, email: $email, password: $password")
                 val validEmail = isEmailValid(this@RegisterActivity, email)
                 val validPassword = isPasswordValid(this@RegisterActivity, password)
 
@@ -67,25 +77,17 @@ class RegisterActivity : AppCompatActivity() {
                                 is State.Loading -> {
                                     progressBar.visibility = View.VISIBLE
                                     btnDaftar.visibility = View.INVISIBLE
-                                    btnDaftarGoogle.isEnabled = false
                                 }
                                 is State.Success -> {
                                     progressBar.visibility = View.GONE
                                     btnDaftar.visibility = View.VISIBLE
-                                    btnDaftarGoogle.isEnabled = true
-                                    val data = it.data
-                                    Toast.makeText(
-                                        this@RegisterActivity,
-                                        getString(R.string.regist_success_msg),
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    Log.d("Response REGIS SUCCESS", data.toString())
+
                                     onAlertDialog(
                                         this@RegisterActivity,
                                         getString(R.string.regist_success_msg),
                                         getString(R.string.regist_success_msg_desc),
-                                        getString(R.string.back),
-                                        getString(R.string.next)
+                                        getString(R.string.cancel),
+                                        getString(R.string.yes)
                                     ) {
                                         startActivity(
                                             Intent(
@@ -98,33 +100,14 @@ class RegisterActivity : AppCompatActivity() {
                                 is State.Error -> {
                                     progressBar.visibility = View.GONE
                                     btnDaftar.visibility = View.VISIBLE
-                                    btnDaftarGoogle.isEnabled = true
-                                    Toast.makeText(
-                                        this@RegisterActivity,
-                                        it.error,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    Log.d("Response REGISTER ERROR", it.error)
+                                    Toast.makeText(this@RegisterActivity, it.error, Toast.LENGTH_SHORT).show()
+                                    Log.d("RegisterActivity", it.error)
                                 }
-                                else -> {}
                             }
                         }
                     }
                 }
             }
         }
-    }
-
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
     }
 }

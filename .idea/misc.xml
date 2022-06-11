@@ -13,21 +13,21 @@
         <entry key="app/src/main/res/drawable/shape_rectangle_outlined.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/shape_rectangle_outlined_grey.xml" value="0.2015" />
         <entry key="app/src/main/res/layout/activity_add_or_edit_diary.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_detail_or_add_or_edit_diary.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_detail_or_add_or_edit_diary.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_on_boarding.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24205748865355523" />
+        <entry key="app/src/main/res/layout/activity_on_boarding.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_web_view.xml" value="0.19375" />
-        <entry key="app/src/main/res/layout/fragment_article.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_article.xml" value="0.17864583333333334" />
         <entry key="app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.19375" />
-        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18716577540106952" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.19375" />

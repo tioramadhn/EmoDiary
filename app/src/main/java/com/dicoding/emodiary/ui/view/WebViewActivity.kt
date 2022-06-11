@@ -1,22 +1,19 @@
 package com.dicoding.emodiary.ui.view
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivityWebViewBinding
-import com.dicoding.emodiary.utils.onAlertDialog
 
 class WebViewActivity : AppCompatActivity() {
     private lateinit var binding : ActivityWebViewBinding
-    companion object{
-        const val EXTRA_URL = "extra_url"
-    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,20 +24,20 @@ class WebViewActivity : AppCompatActivity() {
         val url = intent.getStringExtra(EXTRA_URL)
         binding.apply{
             webView.settings.javaScriptEnabled = true
-
             webView.webViewClient = object : WebViewClient() {
-                override fun onPageFinished(view: WebView, url: String) {
-                    Toast.makeText(this@WebViewActivity, "Artikel berhasil dimuat", Toast.LENGTH_LONG).show()
+                override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                    super.onReceivedError(view, request, error)
+                    Toast.makeText(this@WebViewActivity, getString(R.string.unknown_error), Toast.LENGTH_LONG).show()
                 }
             }
 
-            if (url != null) {
-                webView.loadUrl(url)
-            }
+            if (url != null) webView.loadUrl(url)
         }
 
-        supportActionBar?.title = "Artikel"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            title = getString(R.string.title_article)
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -49,8 +46,11 @@ class WebViewActivity : AppCompatActivity() {
                 finish()
                 return true
             }
-
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object{
+        const val EXTRA_URL = "EXTRA_URL"
     }
 }

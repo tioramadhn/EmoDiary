@@ -4,10 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.dicoding.emodiary.BuildConfig
+import android.provider.Settings
+import android.widget.CompoundButton
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivitySettingsBinding
+import com.dicoding.emodiary.ui.viewmodel.MainViewModel
+import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
 import com.dicoding.emodiary.utils.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,8 +22,10 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var gso: GoogleSignInOptions
     private lateinit var gsc: GoogleSignInClient
+    private val viewModel: MainViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
-    //    private lateinit var binding: UnderDevelopmentBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
@@ -38,43 +45,45 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun setupView() {
         val session = SessionManager(this)
-        binding.tvName.text = session.getString(FULL_NAME)
-        binding.tvEmail.text = session.getString(EMAIL)
         val photoUrl = session.getString(PHOTO_URL)
-        if(photoUrl.isEmpty()){
-            Glide.with(binding.imgProfilePicture.context)
-                .load(R.drawable.default_profile)
-                .circleCrop()
-                .into(binding.imgProfilePicture)
-        }else{
-            Glide.with(binding.imgProfilePicture.context)
-                .load(photoUrl)
-                .circleCrop()
-                .into(binding.imgProfilePicture)
+        binding.apply {
+            tvName.text = session.getString(FULL_NAME)
+            tvEmail.text = session.getString(EMAIL)
+            if (photoUrl.isNotEmpty()) imgProfilePicture.setImage(this@SettingsActivity, photoUrl)
+
+            viewModel.getThemeSetting().observe(this@SettingsActivity) { isDarkModeActive: Boolean ->
+                darkModeSwitch.isChecked = isDarkModeActive
+                val default = if(isDarkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+                AppCompatDelegate.setDefaultNightMode(default)
+            }
+
+            darkModeSwitch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+                viewModel.saveThemeSetting(isChecked)
+            }
         }
     }
 
     private fun setupAction() {
-        //go to profile
         binding.box.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
-            finish()
         }
 
-        //Logout
+        binding.btnLanguange.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+        }
+
         binding.btnLogout.setOnClickListener {
             onAlertDialog(
                 this,
                 getString(R.string.title_logout_msg),
                 getString(R.string.desc_logout_msg),
-                getString(R.string.back),
-                getString(R.string.next),
+                getString(R.string.cancel),
+                getString(R.string.yes),
             ) {
                 logOut()
             }
 
         }
-
     }
 
     private fun logOut() {

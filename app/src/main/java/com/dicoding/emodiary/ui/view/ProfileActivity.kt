@@ -102,6 +102,8 @@ class ProfileActivity : AppCompatActivity() {
             requestImageFile
         )
 
+        Log.d("pantau", file.toString())
+
         viewModel.uploadPhoto(session.getString(USER_ID), imageMultipart).observe(this){
             when (it){
                 is State.Loading -> {
@@ -160,23 +162,15 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setupView() {
         val session = SessionManager(this)
-        Glide.with(binding.imgProfile.context)
-            .load(R.drawable.default_profile)
-            .circleCrop()
-            .into(binding.imgProfile)
-
-        binding.tvProfileName.text = session.getString(FULL_NAME)
-        binding.tvProfileEmail.text = session.getString(EMAIL)
-
+        binding.apply {
+            imgProfile.setImage(this@ProfileActivity, session.getString(PHOTO_URL))
+            tvProfileName.text = session.getString(FULL_NAME)
+            tvProfileEmail.text = session.getString(EMAIL)
+        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

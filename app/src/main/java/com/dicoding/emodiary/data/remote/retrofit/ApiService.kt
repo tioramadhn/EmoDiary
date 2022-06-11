@@ -43,7 +43,7 @@ interface ApiService {
     @POST("/users/{id}/photo")
     suspend fun uploadPhoto(
         @Path("id") id: String,
-        @Part File: MultipartBody.Part
+        @Part file: MultipartBody.Part
     ): BaseResponse<UserItem?>
 
     @GET("/diaries")

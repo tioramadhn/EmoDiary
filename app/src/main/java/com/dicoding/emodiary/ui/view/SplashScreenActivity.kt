@@ -7,20 +7,28 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.dicoding.emodiary.R
-import com.dicoding.emodiary.utils.ACCESS_TOKEN
-import com.dicoding.emodiary.utils.DELAY
-import com.dicoding.emodiary.utils.IS_USER_SEEN_ONBOARDING_SCREEN
-import com.dicoding.emodiary.utils.SessionManager
+import com.dicoding.emodiary.ui.viewmodel.MainViewModel
+import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
+import com.dicoding.emodiary.utils.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var sessionManager: SessionManager
+    private val viewModel: MainViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        setupView()
+        sessionManager = SessionManager(this)
 
+        setupView()
+        setupThemeSetting()
         Handler(Looper.getMainLooper()).postDelayed({
             val session = SessionManager(this)
             val googleAccount = GoogleSignIn.getLastSignedInAccount(this)
@@ -51,5 +59,12 @@ class SplashScreenActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    private fun setupThemeSetting() {
+        viewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
+            val default = if(isDarkModeActive) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            AppCompatDelegate.setDefaultNightMode(default)
+        }
     }
 }
