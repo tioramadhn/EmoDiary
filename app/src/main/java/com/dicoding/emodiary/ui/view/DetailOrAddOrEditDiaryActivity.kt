@@ -111,22 +111,12 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                     is State.Success -> {
                         binding.progressBar.visibility = View.GONE
                         binding.btnSubmit.visibility = View.VISIBLE
-                        val result = it.data
-                        Toast.makeText(
-                            this@DetailOrAddOrEditDiaryActivity,
-                            result.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                        showBottomSheet(result)
+                        showBottomSheet(it.data)
                     }
                     is State.Error -> {
                         binding.progressBar.visibility = View.GONE
                         binding.btnSubmit.visibility = View.VISIBLE
-                        Toast.makeText(
-                            this@DetailOrAddOrEditDiaryActivity,
-                            it.error,
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@DetailOrAddOrEditDiaryActivity, it.error, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -143,23 +133,12 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                 is State.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.btnSubmit.visibility = View.VISIBLE
-                    val result = it.data
-                    Toast.makeText(
-                        this@DetailOrAddOrEditDiaryActivity,
-                        result.message,
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                    showBottomSheet(result)
+                    showBottomSheet(it.data)
                 }
                 is State.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.btnSubmit.visibility = View.VISIBLE
-                    Toast.makeText(
-                        this@DetailOrAddOrEditDiaryActivity,
-                        it.error,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@DetailOrAddOrEditDiaryActivity, it.error, Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -236,25 +215,17 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
             viewModel.deleteDiary(it).observe(this) { state ->
                 when (state) {
                     is State.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.INVISIBLE
                     }
                     is State.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        Toast.makeText(
-                            this@DetailOrAddOrEditDiaryActivity,
-                            getString(R.string.delete_success_msg),
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@DetailOrAddOrEditDiaryActivity, getString(R.string.delete_success_msg), Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     }
                     is State.Error -> {
                         binding.progressBar.visibility = View.GONE
-                        Toast.makeText(
-                            this@DetailOrAddOrEditDiaryActivity,
-                            state.error,
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@DetailOrAddOrEditDiaryActivity, state.error, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -267,8 +238,8 @@ class DetailOrAddOrEditDiaryActivity : AppCompatActivity() {
                 this,
                 getString(R.string.title_edit_dialog),
                 getString(R.string.title_contentEdit_dialog),
-                getString(R.string.back),
-                getString(R.string.next)
+                getString(R.string.cancel),
+                getString(R.string.yes)
             ) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()

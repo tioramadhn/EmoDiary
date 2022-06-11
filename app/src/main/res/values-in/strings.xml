@@ -4,6 +4,7 @@
 
     <!-- error message -->
     <string name="network_error">Kesalahan jaringan</string>
+    <string name="load_data_error">Gagal memuat data</string>
     <string name="unknown_error">Terjadi kesalahan. Periksa jaringan internet kamu</string>
 
     <!-- Form validation error message -->
@@ -29,12 +30,12 @@
     <string name="masuk">Masuk</string>
     <string name="login_desc">Selamat datang kembali, silahkan masuk dengan akun yang sudah terdaftar</string>
     <string name="email">Email</string>
-    <string name="password">Kata sandi</string>
+    <string name="password">Kata Sandi</string>
     <string name="or">atau</string>
     <string name="masuk_dengan_google">Masuk dengan Google</string>
     <string name="daftar">Daftar</string>
     <string name="regist_desc">Gabung bersama Emo-Diary dan ungkapkan perasaan kamu</string>
-    <string name="full_name">Nama lengkap</string>
+    <string name="full_name">Nama Lengkap</string>
     <string name="sudah_punya_akun">Sudah punya akun?</string>
     <string name="masuk_sekarang">Masuk</string>
     <string name="belum_punya_akun_ayo">Belum punya akun?</string>
@@ -44,7 +45,7 @@
     <string name="date_diary">Kamis, 2 Juni 2022</string>
     <string name="diary_desc">Hari ini aku senang sekali karena bertemu dengan teman baru di kampus. Teman ku bernama Sinta, Jono dan Gono…</string>
     <string name="diary_title">Bertemu dengan teman baru</string>
-    <string name="mood_kamu_hari_ini">Bagaimana perasaanmu hari ini?</string>
+    <string name="mood_kamu_hari_ini">Mood-mu hari ini</string>
     <string name="mood">Senang</string>
     <string name="say_halo">Halo 👋, %1s</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -61,8 +62,8 @@
     <string name="back">back</string>
     <string name="next">next</string>
 
-    <string name="dark">Dark</string>
-    <string name="light">Light</string>
+    <string name="dark">Gelap</string>
+    <string name="light">Terang</string>
 
     <string name="cancel">Batal</string>
     <string name="yes">Ya</string>
@@ -78,21 +79,30 @@
     <string name="menu_delete">Delete</string>
     <string name="delete_success_msg">Diary berhasil dihapus</string>
     <string name="delete_failed_msg">Diary gagal dihapus</string>
-    <string name="desc_no_diary">Biarkan EmoDiary membantu dalam menyelesaikan \nmasalah terkait perasaanmu</string>
-    <string name="title_no_diary">Belom ada Diary nich..</string>
+    <string name="title_no_diary">Kamu belum memiliki diary</string>
+    <string name="desc_no_diary">Ayo mulai buat dan bagikan perasaanmu!</string>
     <string name="get_diary_fail">Diary gagal didapatkan</string>
     <string name="title_is_empty">Judul diary wajib diisi</string>
     <string name="content_is_empty">Content diary wajib diisi</string>
     <string name="content_diary">Isi diary</string>
 
     <string name="update_diary">Simpan Perubahan</string>
+    <string name="save">Simpan</string>
     <string name="add_diary_title">Buat Diary Baru</string>
-    <string name="add_diary_btn">Save</string>
+    <string name="add_diary_btn">Simpan</string>
     <string name="my_diary">Diary Saya</string>
+    <string name="change_password">Ubah Kata Sandi</string>
+    <string name="name_label">Nama Lengkap</string>
+    <string name="email_label">Email</string>
+    <string name="old_pass_label">Kata Sandi Lama</string>
+    <string name="new_pass_label">Kata Sandi Baru</string>
+    <string name="data_saved">Data berhasil disimpan</string>
+    <string name="data_saved_failed">Data gagal disimpan</string>
 
     <string name="theme_setting">Tema</string>
     <string name="language_setting">Bahasa</string>
     <string name="logout_btn">Keluar</string>
+    <string name="recommended_article">Rekomendasi artikel untuk kamu</string>
 
     <!--  Emotions  -->
     <string name="sadness">Sedih</string>
@@ -109,10 +119,10 @@
     <string name="emo_love">🥰</string>
     <string name="emo_surprise">😯</string>
 
-    <string name="title_delete_dialog">Apakah kamu yakin ingin menghapus diary?</string>
-    <string name="content_delete_dialog">Klik lanjut untuk menghapus diary</string>
-    <string name="mood_kamu_sedang">Mood kamu sedang :</string>
-    <string name="unknown_emo">Mood tidak diketahui</string>
+    <string name="title_delete_dialog">Apakah kamu yakin ingin menghapus diary ini?</string>
+    <string name="content_delete_dialog">Klik ya untuk menghapus diary</string>
+    <string name="mood_kamu_sedang">Berdasarkan diary terakhirmu, kamu sedang</string>
+    <string name="unknown_emo">Tidak diketahui</string>
     <string name="emo_unknown">🤔</string>
     <string name="title_logout_msg">Apakah kamu yakin ingin keluar?</string>
     <string name="desc_logout_msg">Klik ya untuk melanjutkan</string>

@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
                 }
                 is State.Error -> {
                     binding.apply {
-                        tvYourMoodToday.text = getString(R.string.unknown_error)
+                        tvYourMoodToday.text = getString(R.string.load_data_error)
                         imgMood.text = myEmotion(requireActivity(), "unknown").second
                     }
                 }

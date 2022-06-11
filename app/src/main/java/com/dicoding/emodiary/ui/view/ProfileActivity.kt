@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,25 +17,19 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivityProfileBinding
-import com.dicoding.emodiary.databinding.FragmentEditProfileBinding
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
 import com.dicoding.emodiary.utils.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
-    private var getFile: File? = null
     private lateinit var session: SessionManager
-
-    companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
-    }
+    private var getFile: File? = null
 
     private val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(this)
@@ -69,11 +62,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionsGranted()) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.permission),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, getString(R.string.permission), Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
@@ -84,9 +73,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
 
-    private val launcherIntentGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
+    private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
             val myFile = uriToFile(selectedImg, this@ProfileActivity)
@@ -99,13 +86,10 @@ class ProfileActivity : AppCompatActivity() {
     private fun uploadImage(file: File) {
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "photo",
+            "file",
             file.name,
             requestImageFile
         )
-
-        Log.d("pantau", file.toString())
-
         viewModel.uploadPhoto(session.getString(USER_ID), imageMultipart).observe(this) {
             when (it) {
                 is State.Loading -> {
@@ -140,7 +124,6 @@ class ProfileActivity : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
-
     private fun setupAction() {
         binding.fabEditPicture.setOnClickListener {
             startGallery()
@@ -173,15 +156,23 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setupView() {
         val session = SessionManager(this)
+        val googleAccount = GoogleSignIn.getLastSignedInAccount(this)
+
         binding.apply {
             imgProfile.setImage(this@ProfileActivity, session.getString(PHOTO_URL))
             tvProfileName.text = session.getString(FULL_NAME)
             tvProfileEmail.text = session.getString(EMAIL)
+            boxPassword.visibility = if (googleAccount == null) View.VISIBLE else View.INVISIBLE
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    companion object {
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 }

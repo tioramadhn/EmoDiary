@@ -32,7 +32,4 @@ class MainViewModel(private val repository: Repository, private val settingRepos
         }
     }
     fun updateProfile(id: String, userProfileBody: UpdateProfileBody) = repository.updateProfile(id, userProfileBody)
-
-
-
 }

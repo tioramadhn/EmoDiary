@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/mobile_navigation" />
+            app:navGraph="@navigation/mobile_navigation"
+            tools:ignore="FragmentTagUsage" />
     </androidx.core.widget.NestedScrollView>
 
     <View
@@ -111,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Rekomendasi artikel untuk kamu"
+                    android:text="@string/recommended_article"
                     app:layout_constraintTop_toBottomOf="@id/divider" />
 
                 <androidx.recyclerview.widget.RecyclerView
