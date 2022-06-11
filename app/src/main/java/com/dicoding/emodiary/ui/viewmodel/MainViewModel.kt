@@ -1,13 +1,15 @@
 package com.dicoding.emodiary.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import android.content.Context
+import androidx.lifecycle.*
 import com.dicoding.emodiary.data.remote.body.CreateDiaryBody
 import com.dicoding.emodiary.data.remote.body.RegisterBody
+import com.dicoding.emodiary.data.remote.body.UpdateProfileBody
 import com.dicoding.emodiary.data.repository.Repository
 import com.dicoding.emodiary.data.repository.SettingRepository
+import com.dicoding.emodiary.utils.EMAIL
+import com.dicoding.emodiary.utils.FULL_NAME
+import com.dicoding.emodiary.utils.SessionManager
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
@@ -29,4 +31,8 @@ class MainViewModel(private val repository: Repository, private val settingRepos
             with(settingRepository) { this.saveThemeSetting(isDarkModeActive) }
         }
     }
+    fun updateProfile(id: String, userProfileBody: UpdateProfileBody) = repository.updateProfile(id, userProfileBody)
+
+
+
 }

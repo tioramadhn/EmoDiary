@@ -49,6 +49,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.apply {
             tvName.text = session.getString(FULL_NAME)
             tvEmail.text = session.getString(EMAIL)
+
             if (photoUrl.isNotEmpty()) imgProfilePicture.setImage(this@SettingsActivity, photoUrl)
 
             viewModel.getThemeSetting().observe(this@SettingsActivity) { isDarkModeActive: Boolean ->

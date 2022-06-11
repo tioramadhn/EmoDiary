@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.dicoding.emodiary.R
 import com.dicoding.emodiary.databinding.ActivityProfileBinding
+import com.dicoding.emodiary.databinding.FragmentEditProfileBinding
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
 import com.dicoding.emodiary.utils.*
@@ -31,6 +32,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private var getFile: File? = null
     private lateinit var session: SessionManager
+
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
@@ -104,8 +106,8 @@ class ProfileActivity : AppCompatActivity() {
 
         Log.d("pantau", file.toString())
 
-        viewModel.uploadPhoto(session.getString(USER_ID), imageMultipart).observe(this){
-            when (it){
+        viewModel.uploadPhoto(session.getString(USER_ID), imageMultipart).observe(this) {
+            when (it) {
                 is State.Loading -> {
                     binding.imgProfile.visibility = View.INVISIBLE
                     binding.progressBar.visibility = View.VISIBLE
@@ -140,23 +142,32 @@ class ProfileActivity : AppCompatActivity() {
 
 
     private fun setupAction() {
-        val modalBottomSheet = ModalBottomSheet()
-
-
         binding.fabEditPicture.setOnClickListener {
             startGallery()
         }
 
         binding.boxName.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putInt(ModalBottomSheet.FLAG_ID, 0)
+            val modalBottomSheet = ModalBottomSheet()
+            modalBottomSheet.arguments = mBundle
             modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
+        }
 
-            binding.boxEmail.setOnClickListener {
-                modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
-            }
+        binding.boxEmail.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putInt(ModalBottomSheet.FLAG_ID, 1)
+            val modalBottomSheet = ModalBottomSheet()
+            modalBottomSheet.arguments = mBundle
+            modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
+        }
 
-            binding.boxPassword.setOnClickListener {
-                modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
-            }
+        binding.boxPassword.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putInt(ModalBottomSheet.FLAG_ID, 2)
+            val modalBottomSheet = ModalBottomSheet()
+            modalBottomSheet.arguments = mBundle
+            modalBottomSheet.show(supportFragmentManager, ModalBottomSheet.TAG)
         }
     }
 

@@ -8,27 +8,33 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
+import com.dicoding.emodiary.data.remote.body.UpdateProfileBody
+import com.dicoding.emodiary.data.remote.response.BaseResponse
+import com.dicoding.emodiary.data.remote.response.UserItem
 import com.dicoding.emodiary.databinding.FragmentEditProfileBinding
 import com.dicoding.emodiary.ui.viewmodel.MainViewModel
 import com.dicoding.emodiary.ui.viewmodel.ViewModelFactory
+import com.dicoding.emodiary.utils.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 class ModalBottomSheet : BottomSheetDialogFragment() {
     private var _binding: FragmentEditProfileBinding? = null
-
+    private lateinit var session: SessionManager
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     companion object {
         const val TAG = "ModalBottomSheet"
+        const val FLAG_ID = "extra_flag"
     }
 
-
-    private val viewModel: MainViewModel by viewModels {
+    val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(requireActivity())
     }
 
@@ -38,7 +44,7 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        session = SessionManager(requireActivity())
         binding.edtData.requestFocus()
         val inputManager =
             context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -46,6 +52,75 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
 //        setupView()
 //        setupAction()
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val flagId = arguments?.getInt(FLAG_ID)
+
+        if(flagId == 0){
+            binding.tvTitle.text = "Masukkan nama anda"
+            binding.tvReTitle.visibility = View.GONE
+            binding.edtReData.visibility = View.GONE
+            binding.edtData.setText(session.getString(FULL_NAME))
+        }else if(flagId == 1){
+            binding.tvTitle.text = "Masukkan email anda"
+            binding.tvReTitle.visibility = View.GONE
+            binding.edtReData.visibility = View.GONE
+            binding.edtData.setText(session.getString(EMAIL))
+        }else if(flagId == 2){
+            binding.tvTitle.text = "Masukkan password lama anda"
+            binding.tvReTitle.visibility = View.VISIBLE
+            binding.edtReData.visibility = View.VISIBLE
+        }
+
+        binding.btnSave.setOnClickListener {
+            val current = binding.edtData.text.toString()
+            val newPassword = binding.edtReData.text.toString()
+            if(flagId == 0 && current.isNotEmpty()){
+                val data = UpdateProfileBody()
+                updateData(data)
+            }else if(flagId == 1 && current.isNotEmpty()){
+                val data = UpdateProfileBody(email = current)
+                updateData(data)
+            }else if(flagId == 2 && current.isNotEmpty() && newPassword.isNotEmpty()){
+                val data = UpdateProfileBody(currentPassword = current, newPassword = newPassword)
+                updateData(data)
+            }
+        }
+
+    }
+
+    private fun updateData(newData: UpdateProfileBody) {
+        viewModel.updateProfile(session.getString(USER_ID), newData).observe(this){
+            when (it){
+                is State.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.btnSave.visibility = View.INVISIBLE
+                }
+                is State.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.btnSave.visibility = View.VISIBLE
+                    it.data.data?.let { res -> setToSession(res) }
+                    Toast.makeText(requireActivity(), "Data berhasil disimpan", Toast.LENGTH_SHORT).show()
+                }
+                is State.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.btnSave.visibility = View.VISIBLE
+                    Toast.makeText(requireActivity(), "Data gagal disimpan", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun setToSession(data: UserItem) {
+        val flagId = arguments?.getInt(FLAG_ID)
+        if(flagId == 0){
+            data.fullname?.let { session.setString(FULL_NAME, it) }
+        }else if(flagId == 1 ){
+            data.email?.let { session.setString(EMAIL, it) }
+        }
     }
 
 
@@ -60,13 +135,7 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
-//    private fun setupAction() {
-//        TODO("Not yet implemented")
-//    }
-//
-//    private fun setupView() {
-//        TODO("Not yet implemented")
-//    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
