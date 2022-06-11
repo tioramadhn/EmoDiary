@@ -21,10 +21,10 @@
     <string name="title_menu_1">Virtual Emotional Support System</string>
     <string name="desc_menu_1">Ceritakan apapun yang kamu rasakan</string>
     <string name="mulai">Mulai</string>
-    <string name="title_menu_2">Teman virtual</string>
-    <string name="desc_menu_2">Kami akan mendengar cerita mu hari ini</string>
-    <string name="title_menu_3">Santai kayak dipantai</string>
-    <string name="desc_menu_3">Pikiran tenang dan nyaman bersama kami</string>
+    <string name="title_menu_2">Understanding your emotions</string>
+    <string name="desc_menu_2">Dapatkan solusi berdasarkan emosi kamu melalui pilihan artikel bermanfaat</string>
+    <string name="title_menu_3">From anywhere and anytime</string>
+    <string name="desc_menu_3">Dimanapun kamu berada, EmoDiary siap membantu</string>
     <string name="masuk">Login</string>
     <string name="login_desc">Welcome back, please login with registered account</string>
     <string name="email">Email</string>
