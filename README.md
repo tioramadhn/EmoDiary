@@ -7,3 +7,6 @@ Capstone Bangkit 2022
 3. Run in your emulator or real device
 
 Note: For login with google, cannot all people can use this feature in development, ur device must registeres as SHA-1 item in our backend 
+
+# Preview
+https://github.com/tioramadhn/EmoDiary/assets/66185022/90ba1c34-fa9a-4933-a47a-4438f93e3279
